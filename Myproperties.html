@@ -19,15 +19,51 @@
             background-color: #1f2122;
             color: #ec6090;
             padding: 20px;
+            margin: 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
         
         .logo {
-            margin-bottom: 30px;
-            text-align: center;
+            text-align: left;
         }
         
         .logo img {
             max-width: 200px;
+        }
+        
+        .nav-bar {
+            display: flex;
+        }
+        
+        .nav-bar ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-bar ul li {
+            margin-left: 20px;
+        }
+        
+        .nav-bar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-bar ul li a:hover {
+            background-color: #e75e8d;
+            color: white;
         }
         
         .heading {
@@ -103,12 +139,24 @@
 
 <body>
 
-  <div class="logo">
-    <a href="index.html">
-      <img src="assets/images/logo.png" alt="Property Portfolio">
-    </a>
+  <div class="header-container">
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/images/logo.png" alt="Property Portfolio">
+      </a>
+    </div>
+    
+    <nav class="nav-bar">
+      <ul>
+        <li><a href="Myproperties.html"><i class="fa-solid fa-file"></i> Properties</a></li>
+        <li><a href="Transferhistory.html"><i class="fa-solid fa-address-book"></i> History</a></li>
+        <li><a href="Bidding.html"><i class="fa-solid fa-money-bill"></i> Bidding</a></li>
+        <li><a href="Tax.html"><i class="fa-solid fa-coins"></i> Tax</a></li>
+        <li><a href="#" id="ai-assistant-btn"><i class="fa-solid fa-robot"></i> AI Assistant</a></li>
+      </ul>
+    </nav>
   </div>
-
+<br><br>
   <h1 class="heading"><em>My</em> Properties</h1>
 
   <div class="property-container">
@@ -213,6 +261,25 @@
   <footer>
     <p>Copyright © 2023 Property Portfolio. All rights reserved.</p>
   </footer>
+
+  <script>
+    // AI Assistant button functionality
+    document.getElementById('ai-assistant-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!window.Chatling) {
+            const script = document.createElement('script');
+            script.src = 'https://chatling.ai/js/embed.js';
+            script.async = true;
+            script.id = 'chatling-embed-script';
+            script.setAttribute('data-id', '7291819981');
+            document.body.appendChild(script);
+            window.chtlConfig = { chatbotId: "7291819981" };
+        }
+        else if (window.Chatling.open) {
+            window.Chatling.open();
+        }
+    });
+  </script>
 
 </body>
 </html>

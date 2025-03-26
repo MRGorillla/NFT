@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Property Tax - NFT SHIT</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+  
+  <style>
+    :root {
+      --primary-color: #ff7e5f;
+      --secondary-color: #feb47b;
+      --dark-bg: #1a1a1a;
+      --darker-bg: #121212;
+      --card-bg: #333;
+      --text-color: #ffffff;
+      --text-muted: #b0b0b0;
+    }
+    
+    /* Header styling */
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #1f2122;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    .logo {
+      text-align: left;
+    }
+    
+    .logo img {
+      max-width: 150px;
+      height: auto;
+    }
+    
+    .nav-bar {
+      display: flex;
+    }
+    
+    .nav-bar ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .nav-bar ul li {
+      margin-left: 15px;
+    }
+    
+    .nav-bar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .nav-bar ul li a:hover {
+      background-color: #e75e8d;
+      color: white;
+    }
+    
+    .nav-bar ul li a.active {
+      background-color: #e75e8d;
+    }
+    
+    /* Property Tax Container */
+    .property-tax-container {
+      padding: 120px 20px 40px;
+      background-color: var(--darker-bg);
+      min-height: 100vh;
+    }
+    
+    /* Autocomplete styling */
+    .autocomplete {
+      position: relative;
+    }
+    
+    .autocomplete-items {
+      position: absolute;
+      border: 1px solid #444;
+      border-bottom: none;
+      border-top: none;
+      z-index: 99;
+      top: 100%;
+      left: 0;
+      right: 0;
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: #333;
+      border-radius: 0 0 8px 8px;
+    }
+    
+    .autocomplete-items div {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #333;
+      border-bottom: 1px solid #444;
+      color: white;
+    }
+    
+    .autocomplete-items div:hover {
+      background-color: #444;
+    }
+    
+    .autocomplete-active {
+      background-color: #e75e8d !important;
+      color: white !important;
+    }
+    
+    /* Tax Calculator Section */
+    .tax-calculator {
+      background: var(--dark-bg);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .tax-calculator h2 {
+      color: var(--primary-color);
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+    
+    .tax-calculator .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .tax-calculator label {
+      color: var(--text-color);
+      margin-bottom: 8px;
+      font-weight: 500;
+      display: block;
+    }
+    
+    .tax-calculator .input-group {
+      position: relative;
+    }
+    
+    .tax-calculator .input-group-prepend .input-group-text {
+      background: #444;
+      color: var(--text-color);
+      border: none;
+    }
+    
+    .tax-calculator input,
+    .tax-calculator select {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      background: #444;
+      color: var(--text-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .tax-calculator input:focus,
+    .tax-calculator select:focus {
+      background: #555;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.2rem rgba(255, 126, 95, 0.25);
+      outline: none;
+    }
+    
+    .tax-calculator button {
+      padding: 12px 30px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+    
+    .tax-calculator button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+    }
+    
+    .tax-result {
+      margin-top: 25px;
+      padding: 20px;
+      background: rgba(255, 126, 95, 0.1);
+      border-radius: 8px;
+      color: var(--text-color);
+      font-size: 18px;
+      border-left: 4px solid var(--primary-color);
+      display: none;
+    }
+    
+    .tax-result.show {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        padding: 10px;
+      }
+      
+      .logo {
+        margin-bottom: 10px;
+      }
+      
+      .nav-bar ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .nav-bar ul li {
+        margin: 5px;
+      }
+      
+      .property-tax-container {
+        padding: 150px 15px 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header with Logo and Navigation -->
+  <div class="header-container">
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/images/logo.png" alt="Property Portfolio">
+      </a>
+    </div>
+    
+    <nav class="nav-bar">
+      <ul>
+        <li><a href="Myproperties.html"><i class="fa-solid fa-file"></i> Properties</a></li>
+        <li><a href="Transferhistory.html"><i class="fa-solid fa-address-book"></i> History</a></li>
+        <li><a href="Bidding.html"><i class="fa-solid fa-money-bill"></i> Bidding</a></li>
+        <li><a href="Tax.html" class="active"><i class="fa-solid fa-coins"></i> Tax</a></li>
+        <li><a href="#" id="ai-assistant-btn"><i class="fa-solid fa-robot"></i> AI Assistant</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container property-tax-container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+          
+          <div class="page-header mb-4">
+            <h1 class="section-title">Property Tax Calculator</h1>
+            <p class="text-muted">Calculate and manage your property taxes</p>
+          </div>
+
+          <div class="tax-calculator">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2><i class="fas fa-calculator me-2"></i>Tax Calculator</h2>
+            </div>
+            
+            <form id="tax-calculator-form">
+              <div class="form-group">
+                <label for="property-value">
+                  Property Value (in ₹)
+                </label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">₹</span>
+                  </div>
+                  <input type="number" id="property-value" class="form-control" placeholder="Enter property value" min="0" required>
+                </div>
+              </div>
+              
+              <div class="form-group autocomplete">
+                <label for="location">City/Municipality</label>
+                <input type="text" id="location" class="form-control" placeholder="Start typing your city" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="property-type">Property Type</label>
+                <select id="property-type" class="form-select" required>
+                  <option value="">Select property type</option>
+                  <option value="residential">Residential</option>
+                  <option value="commercial">Commercial</option>
+                  <option value="industrial">Industrial</option>
+                  <option value="vacant-land">Vacant Land</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="property-age">Property Age (years)</label>
+                <input type="number" id="property-age" class="form-control" placeholder="Enter property age" min="0" max="100">
+              </div>
+              
+              <div class="form-group">
+                <label for="built-up-area">Built-up Area (sq. ft.)</label>
+                <input type="number" id="built-up-area" class="form-control" placeholder="Enter built-up area" min="0">
+              </div>
+              
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="fas fa-calculator me-2"></i>Calculate Tax
+                </button>
+              </div>
+            </form>
+            
+            <div class="tax-result" id="tax-result">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0">Estimated Tax</h5>
+                <span class="badge bg-success">Current Rate</span>
+              </div>
+              <div class="d-flex align-items-end mb-3">
+                <h2 class="mb-0 me-2" id="tax-amount">₹0.00</h2>
+                <span class="text-muted">per year</span>
+              </div>
+              
+              <div class="mb-3">
+                <div class="d-flex justify-content-between">
+                  <small>Tax Rate</small>
+                  <small id="tax-rate">0%</small>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" id="tax-rate-bar" role="progressbar" style="width: 0%"></div>
+                </div>
+              </div>
+              
+              <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>
+                <span id="tax-info">Based on current municipal rates. Actual tax may vary slightly.</span>
+              </div>
+              
+              <button class="btn btn-outline-light w-100" id="proceed-to-pay" disabled>
+                <i class="fas fa-credit-card me-2"></i>Proceed to Payment
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script>
+    // Comprehensive database of Chennai pincodes and areas
+    const addressDatabase = {
+      "600001": { state: "Tamil Nadu", city: "Chennai", area: "Parrys Corner", pincode: "600001" },
+      "600002": { state: "Tamil Nadu", city: "Chennai", area: "Mint Street", pincode: "600002" },
+      "600003": { state: "Tamil Nadu", city: "Chennai", area: "George Town", pincode: "600003" },
+      "600004": { state: "Tamil Nadu", city: "Chennai", area: "Flower Bazaar", pincode: "600004" },
+      "600005": { state: "Tamil Nadu", city: "Chennai", area: "Washermanpet", pincode: "600005" },
+      "600006": { state: "Tamil Nadu", city: "Chennai", area: "Tondiarpet", pincode: "600006" },
+      "600007": { state: "Tamil Nadu", city: "Chennai", area: "Royapuram", pincode: "600007" },
+      "600008": { state: "Tamil Nadu", city: "Chennai", area: "Perambur", pincode: "600008" },
+      "600009": { state: "Tamil Nadu", city: "Chennai", area: "Vepery", pincode: "600009" },
+      "600010": { state: "Tamil Nadu", city: "Chennai", area: "Purasawalkam", pincode: "600010" },
+      "600011": { state: "Tamil Nadu", city: "Chennai", area: "Kilpauk", pincode: "600011" },
+      "600012": { state: "Tamil Nadu", city: "Chennai", area: "Egmore", pincode: "600012" },
+      "600013": { state: "Tamil Nadu", city: "Chennai", area: "Park Town", pincode: "600013" },
+      "600014": { state: "Tamil Nadu", city: "Chennai", area: "Chetput", pincode: "600014" },
+      "600015": { state: "Tamil Nadu", city: "Chennai", area: "Nungambakkam", pincode: "600015" },
+      "600016": { state: "Tamil Nadu", city: "Chennai", area: "Teynampet", pincode: "600016" },
+      "600017": { state: "Tamil Nadu", city: "Chennai", area: "Alwarpet", pincode: "600017" },
+      "600018": { state: "Tamil Nadu", city: "Chennai", area: "Mylapore", pincode: "600018" },
+      "600019": { state: "Tamil Nadu", city: "Chennai", area: "Mandaveli", pincode: "600019" },
+      "600020": { state: "Tamil Nadu", city: "Chennai", area: "Triplicane", pincode: "600020" },
+      "600021": { state: "Tamil Nadu", city: "Chennai", area: "Guindy Industrial Estate", pincode: "600021" },
+      "600022": { state: "Tamil Nadu", city: "Chennai", area: "Saidapet", pincode: "600022" },
+      "600023": { state: "Tamil Nadu", city: "Chennai", area: "West Mambalam", pincode: "600023" },
+      "600024": { state: "Tamil Nadu", city: "Chennai", area: "T. Nagar", pincode: "600024" },
+      "600025": { state: "Tamil Nadu", city: "Chennai", area: "Kodambakkam", pincode: "600025" },
+      "600026": { state: "Tamil Nadu", city: "Chennai", area: "Virugambakkam", pincode: "600026" },
+      "600028": { state: "Tamil Nadu", city: "Chennai", area: "T. Nagar", pincode: "600028" },
+      "600029": { state: "Tamil Nadu", city: "Chennai", area: "Gandhi Nagar", pincode: "600029" },
+      "600030": { state: "Tamil Nadu", city: "Chennai", area: "Aminjikarai", pincode: "600030" },
+      "600031": { state: "Tamil Nadu", city: "Chennai", area: "Kolathur", pincode: "600031" },
+      "600032": { state: "Tamil Nadu", city: "Chennai", area: "Villivakkam", pincode: "600032" },
+      "600033": { state: "Tamil Nadu", city: "Chennai", area: "Madhavaram", pincode: "600033" },
+      "600034": { state: "Tamil Nadu", city: "Chennai", area: "Manali", pincode: "600034" },
+      "600035": { state: "Tamil Nadu", city: "Chennai", area: "Ennore", pincode: "600035" },
+      "600036": { state: "Tamil Nadu", city: "Chennai", area: "Tiruvottiyur", pincode: "600036" },
+      "600037": { state: "Tamil Nadu", city: "Chennai", area: "Kathivakkam", pincode: "600037" },
+      "600038": { state: "Tamil Nadu", city: "Chennai", area: "Ernavoor", pincode: "600038" },
+      "600039": { state: "Tamil Nadu", city: "Chennai", area: "Minjur", pincode: "600039" },
+      "600040": { state: "Tamil Nadu", city: "Chennai", area: "Sholinganallur", pincode: "600040" },
+      "600041": { state: "Tamil Nadu", city: "Chennai", area: "Pallavaram", pincode: "600041" },
+      "600042": { state: "Tamil Nadu", city: "Chennai", area: "Adyar", pincode: "600042" },
+      "600043": { state: "Tamil Nadu", city: "Chennai", area: "Thiruvanmiyur", pincode: "600043" },
+      "600044": { state: "Tamil Nadu", city: "Chennai", area: "Kottivakkam", pincode: "600044" },
+      "600045": { state: "Tamil Nadu", city: "Chennai", area: "Palavakkam", pincode: "600045" },
+      "600046": { state: "Tamil Nadu", city: "Chennai", area: "Neelankarai", pincode: "600046" },
+      "600047": { state: "Tamil Nadu", city: "Chennai", area: "Thiruporur", pincode: "600047" },
+      "600048": { state: "Tamil Nadu", city: "Chennai", area: "Kovalam", pincode: "600048" },
+      "600049": { state: "Tamil Nadu", city: "Chennai", area: "Medavakkam", pincode: "600049" },
+      "600050": { state: "Tamil Nadu", city: "Chennai", area: "Tambaram", pincode: "600050" },
+      "600051": { state: "Tamil Nadu", city: "Chennai", area: "Chromepet", pincode: "600051" },
+      "600052": { state: "Tamil Nadu", city: "Chennai", area: "Pallikaranai", pincode: "600052" },
+      "600053": { state: "Tamil Nadu", city: "Chennai", area: "Perungalathur", pincode: "600053" },
+      "600054": { state: "Tamil Nadu", city: "Chennai", area: "Vandalur", pincode: "600054" },
+      "600055": { state: "Tamil Nadu", city: "Chennai", area: "Guduvancheri", pincode: "600055" },
+      "600056": { state: "Tamil Nadu", city: "Chennai", area: "Poonamallee", pincode: "600056" },
+      "600057": { state: "Tamil Nadu", city: "Chennai", area: "Avadi", pincode: "600057" },
+      "600058": { state: "Tamil Nadu", city: "Chennai", area: "Ambattur", pincode: "600058" },
+      "600059": { state: "Tamil Nadu", city: "Chennai", area: "Padi", pincode: "600059" },
+      "600060": { state: "Tamil Nadu", city: "Chennai", area: "Thirumangalam", pincode: "600060" },
+      "600061": { state: "Tamil Nadu", city: "Chennai", area: "Nanganallur", pincode: "600061" },
+      "600062": { state: "Tamil Nadu", city: "Chennai", area: "Keelkattalai", pincode: "600062" },
+      "600063": { state: "Tamil Nadu", city: "Chennai", area: "Pallikaranai", pincode: "600063" },
+      "600064": { state: "Tamil Nadu", city: "Chennai", area: "Thoraipakkam", pincode: "600064" },
+      "600065": { state: "Tamil Nadu", city: "Chennai", area: "Okkiyam Thoraipakkam", pincode: "600065" },
+      "600066": { state: "Tamil Nadu", city: "Chennai", area: "Karapakkam", pincode: "600066" },
+      "600067": { state: "Tamil Nadu", city: "Chennai", area: "Jalladampet", pincode: "600067" },
+      "600068": { state: "Tamil Nadu", city: "Chennai", area: "Ramapuram", pincode: "600068" },
+      "600069": { state: "Tamil Nadu", city: "Chennai", area: "Manapakkam", pincode: "600069" },
+      "600070": { state: "Tamil Nadu", city: "Chennai", area: "Porur", pincode: "600070" },
+      "600071": { state: "Tamil Nadu", city: "Chennai", area: "Iyyappanthangal", pincode: "600071" },
+      "600072": { state: "Tamil Nadu", city: "Chennai", area: "Mogappair West", pincode: "600072" },
+      "600073": { state: "Tamil Nadu", city: "Chennai", area: "Mogappair East", pincode: "600073" },
+      "600074": { state: "Tamil Nadu", city: "Chennai", area: "Anna Nagar West", pincode: "600074" },
+      "600075": { state: "Tamil Nadu", city: "Chennai", area: "Anna Nagar East", pincode: "600075" },
+      "600076": { state: "Tamil Nadu", city: "Chennai", area: "Shenoy Nagar", pincode: "600076" },
+      "600077": { state: "Tamil Nadu", city: "Chennai", area: "Korattur", pincode: "600077" },
+      "600078": { state: "Tamil Nadu", city: "Chennai", area: "Pattaravakkam", pincode: "600078" },
+      "600079": { state: "Tamil Nadu", city: "Chennai", area: "Ambattur Industrial Estate", pincode: "600079" },
+      "600080": { state: "Tamil Nadu", city: "Chennai", area: "Thirumullaivoyal", pincode: "600080" },
+      "600081": { state: "Tamil Nadu", city: "Chennai", area: "Athipet", pincode: "600081" },
+      "600082": { state: "Tamil Nadu", city: "Chennai", area: "Kattupakkam", pincode: "600082" },
+      "600083": { state: "Tamil Nadu", city: "Chennai", area: "Mangadu", pincode: "600083" },
+      "600084": { state: "Tamil Nadu", city: "Chennai", area: "Kundrathur", pincode: "600084" },
+      "600085": { state: "Tamil Nadu", city: "Chennai", area: "Pammal", pincode: "600085" },
+      "600086": { state: "Tamil Nadu", city: "Chennai", area: "Pozhichalur", pincode: "600086" },
+      "600087": { state: "Tamil Nadu", city: "Chennai", area: "St. Thomas Mount", pincode: "600087" },
+      "600088": { state: "Tamil Nadu", city: "Chennai", area: "Alapakkam", pincode: "600088" },
+      "600089": { state: "Tamil Nadu", city: "Chennai", area: "Valasaravakkam", pincode: "600089" },
+      "600090": { state: "Tamil Nadu", city: "Chennai", area: "Ramavaram", pincode: "600090" },
+      "600091": { state: "Tamil Nadu", city: "Chennai", area: "Perumbakkam", pincode: "600091" },
+      "600092": { state: "Tamil Nadu", city: "Chennai", area: "Sholinganallur", pincode: "600092" },
+      "600093": { state: "Tamil Nadu", city: "Chennai", area: "Semmenchery", pincode: "600093" },
+      "600094": { state: "Tamil Nadu", city: "Chennai", area: "Uthandi", pincode: "600094" },
+      "600095": { state: "Tamil Nadu", city: "Chennai", area: "Kancheepuram", pincode: "600095" },
+      "600096": { state: "Tamil Nadu", city: "Chennai", area: "Tirukalikundram", pincode: "600096" },
+      "600097": { state: "Tamil Nadu", city: "Chennai", area: "Mahabalipuram", pincode: "600097" },
+      "600099": { state: "Tamil Nadu", city: "Chennai", area: "Chennai Central", pincode: "600099" },
+      "600100": { state: "Tamil Nadu", city: "Chennai", area: "Chennai Airport", pincode: "600100" },
+      "600101": { state: "Tamil Nadu", city: "Chennai", area: "Chennai Harbour", pincode: "600101" },
+      "600102": { state: "Tamil Nadu", city: "Chennai", area: "Chennai Fort", pincode: "600102" },
+      "600103": { state: "Tamil Nadu", city: "Chennai", area: "Chennai Beach", pincode: "600103" },
+      "600104": { state: "Tamil Nadu", city: "Chennai", area: "Chennai High Court", pincode: "600104" },
+      "600105": { state: "Tamil Nadu", city: "Chennai", area: "Chennai Central Station", pincode: "600105" },
+      "600106": { state: "Tamil Nadu", city: "Chennai", area: "Chennai Egmore Station", pincode: "600106" },
+      "600107": { state: "Tamil Nadu", city: "Chennai", area: "Chennai Tambaram Station", pincode: "600107" },
+      "600108": { state: "Tamil Nadu", city: "Chennai", area: "Chennai Guindy Station", pincode: "600108" },
+      "600109": { state: "Tamil Nadu", city: "Chennai", area: "Chennai Beach Station", pincode: "600109" },
+      "600110": { state: "Tamil Nadu", city: "Chennai", area: "Chennai Moore Market Complex", pincode: "600110" },
+      "600113": { state: "Tamil Nadu", city: "Chennai", area: "Tiruvallur", pincode: "600113" },
+      "600114": { state: "Tamil Nadu", city: "Chennai", area: "Gummidipoondi", pincode: "600114" },
+      "600115": { state: "Tamil Nadu", city: "Chennai", area: "Ponneri", pincode: "600115" },
+      "600116": { state: "Tamil Nadu", city: "Chennai", area: "Uthukottai", pincode: "600116" },
+      "600117": { state: "Tamil Nadu", city: "Chennai", area: "Tiruttani", pincode: "600117" },
+      "600118": { state: "Tamil Nadu", city: "Chennai", area: "Pallipattu", pincode: "600118" },
+      "600119": { state: "Tamil Nadu", city: "Chennai", area: "Cholavaram", pincode: "600119" },
+      "600120": { state: "Tamil Nadu", city: "Chennai", area: "Kadambathur", pincode: "600120" },
+      "600122": { state: "Tamil Nadu", city: "Chennai", area: "Sriperumbudur", pincode: "600122" },
+      "600123": { state: "Tamil Nadu", city: "Chennai", area: "Kundrathur", pincode: "600123" },
+      "600124": { state: "Tamil Nadu", city: "Chennai", area: "Poonamallee", pincode: "600124" },
+      "600125": { state: "Tamil Nadu", city: "Chennai", area: "Avadi Camp", pincode: "600125" },
+      "600126": { state: "Tamil Nadu", city: "Chennai", area: "Ambattur OT", pincode: "600126" },
+      "600127": { state: "Tamil Nadu", city: "Chennai", area: "Pattabiram", pincode: "600127" },
+      "600128": { state: "Tamil Nadu", city: "Chennai", area: "Nemilichery", pincode: "600128" },
+      "600129": { state: "Tamil Nadu", city: "Chennai", area: "Hindu College", pincode: "600129" },
+      "600130": { state: "Tamil Nadu", city: "Chennai", area: "Chennai Trade Centre", pincode: "600130" }
+    };
+
+    // Also add area name mappings (lowercase keys)
+    addressDatabase["parrys corner"] = addressDatabase["600001"];
+    addressDatabase["george town"] = addressDatabase["600003"];
+    addressDatabase["adyar"] = addressDatabase["600042"];
+    addressDatabase["thiruvanmiyur"] = addressDatabase["600043"];
+    addressDatabase["t. nagar"] = addressDatabase["600028"];
+    addressDatabase["nanganallur"] = addressDatabase["600061"];
+    addressDatabase["velachery"] = addressDatabase["600042"];
+    addressDatabase["anna nagar"] = addressDatabase["600040"];
+    addressDatabase["kk nagar"] = addressDatabase["600078"];
+    addressDatabase["chromepet"] = addressDatabase["600044"];
+    addressDatabase["tambaram"] = addressDatabase["600045"];
+    addressDatabase["pallavaram"] = addressDatabase["600043"];
+    addressDatabase["porur"] = addressDatabase["600116"];
+    addressDatabase["mogappair"] = addressDatabase["600037"];
+    addressDatabase["ambattur"] = addressDatabase["600053"];
+    addressDatabase["avadi"] = addressDatabase["600054"];
+    addressDatabase["perambur"] = addressDatabase["600011"];
+    addressDatabase["royapuram"] = addressDatabase["600013"];
+    addressDatabase["tondiarpet"] = addressDatabase["600081"];
+    addressDatabase["mylapore"] = addressDatabase["600004"];
+    addressDatabase["triplicane"] = addressDatabase["600005"];
+    addressDatabase["saidapet"] = addressDatabase["600015"];
+    addressDatabase["guindy"] = addressDatabase["600032"];
+    addressDatabase["meenambakkam"] = addressDatabase["600027"];
+    addressDatabase["pallikaranai"] = addressDatabase["600100"];
+    addressDatabase["sholinganallur"] = addressDatabase["600119"];
+    addressDatabase["thoraipakkam"] = addressDatabase["600097"];
+    addressDatabase["karapakkam"] = addressDatabase["600096"];
+    addressDatabase["neelankarai"] = addressDatabase["600041"];
+    addressDatabase["kovalam"] = addressDatabase["600128"];
+    addressDatabase["medavakkam"] = addressDatabase["600100"];
+    addressDatabase["perumbakkam"] = addressDatabase["600100"];
+    addressDatabase["vandalur"] = addressDatabase["600048"];
+    addressDatabase["guduvancheri"] = addressDatabase["600603"];
+    addressDatabase["ponnamallee"] = addressDatabase["600056"];
+    addressDatabase["manapakkam"] = addressDatabase["600125"];
+    addressDatabase["ramapuram"] = addressDatabase["600089"];
+    addressDatabase["porur"] = addressDatabase["600116"];
+    addressDatabase["valasaravakkam"] = addressDatabase["600087"];
+    addressDatabase["virugambakkam"] = addressDatabase["600092"];
+    addressDatabase["koyambedu"] = addressDatabase["600107"];
+    addressDatabase["arumbakkam"] = addressDatabase["600106"];
+    addressDatabase["ashok nagar"] = addressDatabase["600083"];
+    addressDatabase["kodambakkam"] = addressDatabase["600024"];
+    addressDatabase["t.nagar"] = addressDatabase["600017"];
+    addressDatabase["west mambalam"] = addressDatabase["600033"];
+    addressDatabase["nungambakkam"] = addressDatabase["600034"];
+    addressDatabase["teynampet"] = addressDatabase["600018"];
+    addressDatabase["alwarpet"] = addressDatabase["600018"];
+    addressDatabase["mylapore"] = addressDatabase["600004"];
+    addressDatabase["mandaveli"] = addressDatabase["600028"];
+    addressDatabase["besant nagar"] = addressDatabase["600090"];
+    addressDatabase["kotturpuram"] = addressDatabase["600085"];
+    addressDatabase["jafferkhanpet"] = addressDatabase["600083"];
+    addressDatabase["mount road"] = addressDatabase["600002"];
+    addressDatabase["egmore"] = addressDatabase["600008"];
+    addressDatabase["purusawalkam"] = addressDatabase["600084"];
+    addressDatabase["kilpauk"] = addressDatabase["600010"];
+    addressDatabase["chetpet"] = addressDatabase["600031"];
+    addressDatabase["aminjikarai"] = addressDatabase["600029"];
+    addressDatabase["kolathur"] = addressDatabase["600099"];
+    addressDatabase["vyasarpadi"] = addressDatabase["600039"];
+    addressDatabase["villivakkam"] = addressDatabase["600049"];
+    addressDatabase["anna nagar west"] = addressDatabase["600101"];
+    addressDatabase["anna nagar east"] = addressDatabase["600102"];
+    addressDatabase["shenoy nagar"] = addressDatabase["600030"];
+    addressDatabase["mogappair east"] = addressDatabase["600037"];
+    addressDatabase["mogappair west"] = addressDatabase["600037"];
+    addressDatabase["ambattur industrial estate"] = addressDatabase["600058"];
+    addressDatabase["padi"] = addressDatabase["600050"];
+    addressDatabase["korattur"] = addressDatabase["600076"];
+    addressDatabase["pattaravakkam"] = addressDatabase["600024"];
+    addressDatabase["thirumullaivoyal"] = addressDatabase["600062"];
+    addressDatabase["athipet"] = addressDatabase["600058"];
+    addressDatabase["kattupakkam"] = addressDatabase["600056"];
+    addressDatabase["mangadu"] = addressDatabase["600122"];
+    addressDatabase["kundrathur"] = addressDatabase["600069"];
+    addressDatabase["pammal"] = addressDatabase["600075"];
+    addressDatabase["pozhichalur"] = addressDatabase["600074"];
+    addressDatabase["st. thomas mount"] = addressDatabase["600016"];
+    addressDatabase["alapakkam"] = addressDatabase["600116"];
+    addressDatabase["ramavaram"] = addressDatabase["600089"];
+    addressDatabase["semmenchery"] = addressDatabase["600119"];
+    addressDatabase["uthandi"] = addressDatabase["600119"];
+    addressDatabase["kancheepuram"] = addressDatabase["600631"];
+    addressDatabase["tirukalikundram"] = addressDatabase["600603"];
+    addressDatabase["mahabalipuram"] = addressDatabase["600603"];
+    addressDatabase["chennai central"] = addressDatabase["600003"];
+    addressDatabase["chennai airport"] = addressDatabase["600027"];
+    addressDatabase["chennai harbour"] = addressDatabase["600001"];
+    addressDatabase["chennai fort"] = addressDatabase["600001"];
+    addressDatabase["chennai beach"] = addressDatabase["600001"];
+    addressDatabase["chennai high court"] = addressDatabase["600104"];
+    addressDatabase["chennai central station"] = addressDatabase["600003"];
+    addressDatabase["chennai egmore station"] = addressDatabase["600008"];
+    addressDatabase["chennai tambaram station"] = addressDatabase["600045"];
+    addressDatabase["chennai guindy station"] = addressDatabase["600032"];
+    addressDatabase["chennai beach station"] = addressDatabase["600001"];
+    addressDatabase["chennai moore market complex"] = addressDatabase["600003"];
+    addressDatabase["tiruvallur"] = addressDatabase["600602"];
+    addressDatabase["gummidipoondi"] = addressDatabase["600601"];
+    addressDatabase["ponneri"] = addressDatabase["600204"];
+    addressDatabase["uthukottai"] = addressDatabase["600602"];
+    addressDatabase["tiruttani"] = addressDatabase["600601"];
+    addressDatabase["pallipattu"] = addressDatabase["600602"];
+    addressDatabase["cholavaram"] = addressDatabase["600601"];
+    addressDatabase["kadambathur"] = addressDatabase["600204"];
+    addressDatabase["sriperumbudur"] = addressDatabase["600602"];
+    addressDatabase["avadi camp"] = addressDatabase["600054"];
+    addressDatabase["ambattur ot"] = addressDatabase["600053"];
+    addressDatabase["pattabiram"] = addressDatabase["600072"];
+    addressDatabase["nemilichery"] = addressDatabase["600044"];
+    addressDatabase["hindu college"] = addressDatabase["600032"];
+    addressDatabase["chennai trade centre"] = addressDatabase["600113"];
+
+    // Indian cities data for autocomplete
+    const indianCities = [
+      "Chennai, Tamil Nadu",
+      "Mumbai, Maharashtra",
+      "Delhi",
+      "Bangalore, Karnataka",
+      "Hyderabad, Telangana",
+      "Kolkata, West Bengal",
+      "Pune, Maharashtra",
+      "Ahmedabad, Gujarat",
+      "Jaipur, Rajasthan",
+      "Surat, Gujarat",
+      "Lucknow, Uttar Pradesh",
+      "Kanpur, Uttar Pradesh",
+      "Nagpur, Maharashtra",
+      "Visakhapatnam, Andhra Pradesh",
+      "Indore, Madhya Pradesh",
+      "Thane, Maharashtra",
+      "Bhopal, Madhya Pradesh",
+      "Patna, Bihar",
+      "Vadodara, Gujarat",
+      "Ghaziabad, Uttar Pradesh",
+      "Ludhiana, Punjab",
+      "Coimbatore, Tamil Nadu",
+      "Agra, Uttar Pradesh",
+      "Madurai, Tamil Nadu",
+      "Nashik, Maharashtra",
+      "Faridabad, Haryana",
+      "Meerut, Uttar Pradesh",
+      "Rajkot, Gujarat",
+      "Varanasi, Uttar Pradesh",
+      "Srinagar, Jammu and Kashmir",
+      "Aurangabad, Maharashtra",
+      "Dhanbad, Jharkhand",
+      "Amritsar, Punjab",
+      "Navi Mumbai, Maharashtra",
+      "Allahabad, Uttar Pradesh",
+      "Ranchi, Jharkhand",
+      "Howrah, West Bengal",
+      "Jabalpur, Madhya Pradesh",
+      "Gwalior, Madhya Pradesh",
+      "Vijayawada, Andhra Pradesh",
+      "Jodhpur, Rajasthan",
+      "Raipur, Chhattisgarh",
+      "Kota, Rajasthan",
+      "Guwahati, Assam",
+      "Chandigarh",
+      "Thiruvananthapuram, Kerala",
+      "Solapur, Maharashtra",
+      "Tiruchirappalli, Tamil Nadu",
+      "Bareilly, Uttar Pradesh",
+      "Moradabad, Uttar Pradesh",
+      "Mysore, Karnataka"
+    ];
+
+    // Function to update address breakdown
+    function updateAddressBreakdown(input) {
+      const addressBreakdown = document.getElementById('address-breakdown');
+      const stateValue = document.getElementById('state-value');
+      const cityValue = document.getElementById('city-value');
+      const areaValue = document.getElementById('area-value');
+      const pincodeValue = document.getElementById('pincode-value');
+      
+      // Check if input is a pincode (6 digits)
+      if (/^\d{6}$/.test(input)) {
+        const address = addressDatabase[input];
+        if (address) {
+          stateValue.textContent = address.state;
+          cityValue.textContent = address.city;
+          areaValue.textContent = address.area;
+          pincodeValue.textContent = address.pincode;
+          addressBreakdown.classList.add('show');
+          return;
+        }
+      }
+      
+      // Check if input is an area name (case insensitive)
+      const normalizedInput = input.toLowerCase().trim();
+      if (addressDatabase[normalizedInput]) {
+        const address = addressDatabase[normalizedInput];
+        stateValue.textContent = address.state;
+        cityValue.textContent = address.city;
+        areaValue.textContent = address.area;
+        pincodeValue.textContent = address.pincode;
+        addressBreakdown.classList.add('show');
+        return;
+      }
+      
+      // If no match found, hide the breakdown
+      addressBreakdown.classList.remove('show');
+    }
+
+    // Autocomplete function
+    function autocomplete(inp, arr) {
+      let currentFocus;
+      
+      inp.addEventListener("input", function(e) {
+        let val = this.value;
+        closeAllLists();
+        if (!val) { return false; }
+        currentFocus = -1;
+        
+        const list = document.createElement("DIV");
+        list.setAttribute("id", this.id + "-autocomplete-list");
+        list.setAttribute("class", "autocomplete-items");
+        this.parentNode.appendChild(list);
+        
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].toUpperCase().includes(val.toUpperCase())) {
+            const item = document.createElement("DIV");
+            item.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+            item.innerHTML += arr[i].substr(val.length);
+            item.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            
+            item.addEventListener("click", function(e) {
+              inp.value = this.getElementsByTagName("input")[0].value;
+              closeAllLists();
+            });
+            list.appendChild(item);
+          }
+        }
+        
+        // Also update address breakdown as user types
+        updateAddressBreakdown(val);
+      });
+      
+      inp.addEventListener("keydown", function(e) {
+        let items = document.getElementById(this.id + "-autocomplete-list");
+        if (items) items = items.getElementsByTagName("div");
+        
+        if (e.keyCode == 40) { // Down arrow
+          currentFocus++;
+          addActive(items);
+        } else if (e.keyCode == 38) { // Up arrow
+          currentFocus--;
+          addActive(items);
+        } else if (e.keyCode == 13) { // Enter
+          e.preventDefault();
+          if (currentFocus > -1) {
+            if (items) items[currentFocus].click();
+          }
+        }
+      });
+      
+      function addActive(items) {
+        if (!items) return false;
+        removeActive(items);
+        if (currentFocus >= items.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (items.length - 1);
+        items[currentFocus].classList.add("autocomplete-active");
+      }
+      
+      function removeActive(items) {
+        for (let i = 0; i < items.length; i++) {
+          items[i].classList.remove("autocomplete-active");
+        }
+      }
+      
+      function closeAllLists(elmnt) {
+        const items = document.getElementsByClassName("autocomplete-items");
+        for (let i = 0; i < items.length; i++) {
+          if (elmnt != items[i] && elmnt != inp) {
+            items[i].parentNode.removeChild(items[i]);
+          }
+        }
+      }
+      
+      document.addEventListener("click", function(e) {
+        closeAllLists(e.target);
+      });
+    }
+
+    // Tax calculation function
+    function calculateTax() {
+      const propertyValue = parseFloat(document.getElementById('property-value').value);
+      const location = document.getElementById('location').value;
+      const propertyType = document.getElementById('property-type').value;
+      const propertyAge = parseInt(document.getElementById('property-age').value) || 0;
+      const builtUpArea = parseInt(document.getElementById('built-up-area').value) || 1000;
+      
+      if (!propertyValue || !location || !propertyType) {
+        alert('Please fill all required fields');
+        return;
+      }
+      
+      // Sample tax calculation logic (simplified)
+      let baseRate;
+      switch(propertyType) {
+        case 'residential': baseRate = 0.10; break;
+        case 'commercial': baseRate = 0.15; break;
+        case 'industrial': baseRate = 0.12; break;
+        case 'vacant-land': baseRate = 0.08; break;
+        default: baseRate = 0.10;
+      }
+      
+      // Adjustments
+      const ageDiscount = Math.min(propertyAge, 30) * 0.005;
+      const areaAdjustment = Math.min(builtUpArea / 1000, 3) * 0.01;
+      
+      let effectiveRate = baseRate - ageDiscount + areaAdjustment;
+      effectiveRate = Math.max(effectiveRate, baseRate * 0.7);
+      effectiveRate = Math.min(effectiveRate, baseRate * 1.3);
+      
+      const taxAmount = propertyValue * effectiveRate;
+      
+      // Display results
+      document.getElementById('tax-amount').textContent = '₹' + taxAmount.toLocaleString('en-IN');
+      document.getElementById('tax-rate').textContent = (effectiveRate * 100).toFixed(2) + '%';
+      document.getElementById('tax-rate-bar').style.width = (effectiveRate * 500) + '%';
+      
+      // Show result section
+      document.getElementById('tax-result').classList.add('show');
+      document.getElementById('proceed-to-pay').disabled = false;
+    }
+
+    // Initialize when page loads
+    document.addEventListener("DOMContentLoaded", function() {
+      // Initialize autocomplete
+      autocomplete(document.getElementById("location"), indianCities);
+      
+      // Setup form submission
+      document.getElementById('tax-calculator-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        calculateTax();
+      });
+      
+      // AI Assistant button functionality
+      document.getElementById('ai-assistant-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!window.Chatling) {
+          const script = document.createElement('script');
+          script.src = 'https://chatling.ai/js/embed.js';
+          script.async = true;
+          script.id = 'chatling-embed-script';
+          script.setAttribute('data-id', '7291819981');
+          document.body.appendChild(script);
+          window.chtlConfig = { chatbotId: "7291819981" };
+        }
+        else if (window.Chatling.open) {
+          window.Chatling.open();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

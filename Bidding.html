@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Premium property bidding and auction platform">
+  <meta name="keywords" content="real estate, property auction, bidding, nft property">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Propella | Bidding & Auction Platform</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    :root {
+      --primary: #ff7e5f;
+      --secondary: #feb47b;
+      --dark: #0a0a0a;
+      --dark-alt: #1a1a1a;
+      --light: #ffffff;
+      --light-alt: #dddddd;
+      --border: #333333;
+      --border-alt: #444444;
+    }
+
+    /* Base Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--primary);
+      color: var(--light);
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--dark-alt);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 5px;
+    }
+
+    /* Header */
+    .header-area {
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .header-sticky {
+      padding: 10px 0;
+    }
+
+    .logo img {
+      max-height: 40px;
+      transition: all 0.3s ease;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav li {
+      margin-left: 25px;
+    }
+
+    .nav li a {
+      color: var(--light);
+      font-weight: 500;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav li a:hover {
+      color: var(--primary);
+    }
+
+    .nav li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav li a:hover::after {
+      width: 100%;
+    }
+
+    .nav li a img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-left: 5px;
+    }
+
+    .menu-trigger {
+      display: none;
+      color: var(--light);
+      cursor: pointer;
+    }
+
+    /* Main Content */
+    .page-content {
+      padding: 120px 0 60px;
+    }
+
+    .heading-section h4 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      display: inline-block;
+    }
+
+    .heading-section h4::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    /* Map Container */
+    #map {
+      height: 500px;
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(255, 126, 95, 0.2);
+      border: 2px solid var(--primary);
+      overflow: hidden;
+    }
+
+    /* Property Listings */
+    .property-listings {
+      background: var(--dark-alt);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .property-listings h5 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .property-listings h5::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    .property-card {
+      background: var(--border);
+      border-radius: 15px;
+      padding: 0;
+      margin-bottom: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-alt);
+    }
+
+    .property-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(255, 126, 95, 0.3);
+    }
+
+    .property-card .property-image {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .property-card .property-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .property-card:hover .property-image img {
+      transform: scale(1.1);
+    }
+
+    .property-card .property-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--primary);
+      color: var(--light);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 1;
+    }
+
+    .property-card .property-info {
+      padding: 20px;
+    }
+
+    .property-card h6 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .property-card .property-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .property-card .property-meta span {
+      display: flex;
+      align-items: center;
+      color: var(--light-alt);
+      font-size: 0.9rem;
+    }
+
+    .property-card .property-meta i {
+      margin-right: 5px;
+      color: var(--primary);
+    }
+
+    .property-card .property-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--light);
+      margin-bottom: 15px;
+    }
+
+    .property-card .property-price span {
+      color: var(--primary);
+    }
+
+    .bid-progress {
+      background: var(--border-alt);
+      border-radius: 5px;
+      height: 8px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+
+    .bid-progress-bar {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      height: 100%;
+      width: 0;
+      transition: width 0.5s ease;
+      position: relative;
+    }
+
+    .bid-progress-bar::after {
+      content: attr(data-progress);
+      position: absolute;
+      right: 5px;
+      top: -20px;
+      font-size: 0.7rem;
+      color: var(--light);
+    }
+
+    .bid-button {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      color: var(--light);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+    }
+
+    .bid-button:hover {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+    }
+
+    /* Auction Timer */
+    .auction-timer {
+      background: var(--dark-alt);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .auction-timer h5 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .timer {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--light);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+    }
+
+    .timer-expired {
+      color: #ff4757;
+    }
+
+    .timer-segment {
+      display: inline-block;
+      margin: 0 5px;
+    }
+
+    .timer-label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--light-alt);
+      font-size: 0.8rem;
+    }
+
+    /* Live Bidding */
+    .live-bidding {
+      background: var(--dark-alt);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      height: 100%;
+    }
+
+    .live-bidding h5 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .live-bidding-container {
+      height: 300px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    .live-bidding ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .live-bidding ul li {
+      background: var(--border);
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      color: var(--light-alt);
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    .live-bidding ul li:hover {
+      transform: translateX(5px);
+      background: var(--border-alt);
+    }
+
+    .live-bidding ul li .bid-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .live-bidding ul li .bid-amount {
+      color: var(--primary);
+      font-weight: 600;
+      margin-left: 5px;
+    }
+
+    .live-bidding ul li .bid-time {
+      margin-left: auto;
+      font-size: 0.7rem;
+      color: var(--light-alt);
+    }
+
+    /* Filter Section */
+    .filter-section {
+      background: var(--dark-alt);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .filter-section h5 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .filter-group {
+      margin-bottom: 20px;
+    }
+
+    .filter-group label {
+      display: block;
+      color: var(--light-alt);
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    .filter-control {
+      width: 100%;
+      padding: 10px 15px;
+      border-radius: 5px;
+      background: var(--border);
+      color: var(--light);
+      border: 1px solid var(--border-alt);
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .filter-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(255, 126, 95, 0.2);
+    }
+
+    .filter-range {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-range input {
+      flex: 1;
+    }
+
+    .filter-range span {
+      color: var(--light-alt);
+      font-size: 0.9rem;
+    }
+
+    .filter-apply {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      color: var(--light);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+    }
+
+    .filter-apply:hover {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+    }
+
+    /* Help Section */
+    .help-section {
+      background: var(--dark-alt);
+      border-radius: 15px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .help-section h5 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .help-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .help-section ul li {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 25px;
+    }
+
+    .help-section ul li::before {
+      content: '\f054';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      top: 2px;
+      color: var(--primary);
+      font-size: 0.8rem;
+    }
+
+    .help-section ul li a {
+      color: var(--light);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    .help-section ul li a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+
+    /* Modal */
+    .bid-modal .modal-content {
+      background: var(--dark-alt);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      color: var(--light);
+    }
+
+    .bid-modal .modal-header {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bid-modal .modal-title {
+      color: var(--primary);
+    }
+
+    .bid-modal .close {
+      color: var(--light);
+      text-shadow: none;
+      opacity: 1;
+    }
+
+    .bid-modal .form-label {
+      color: var(--light-alt);
+    }
+
+    .bid-modal .form-control {
+      background: var(--border);
+      border: 1px solid var(--border-alt);
+      color: var(--light);
+    }
+
+    .bid-modal .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(255, 126, 95, 0.2);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-alt);
+      padding: 30px 0;
+      color: var(--light-alt);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--secondary);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--border);
+      color: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 1199.98px) {
+      .heading-section h4 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      .nav {
+        display: none;
+      }
+
+      .menu-trigger {
+        display: block;
+      }
+
+      .page-content {
+        padding: 100px 0 40px;
+      }
+
+      #map {
+        height: 400px;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .heading-section h4 {
+        font-size: 1.8rem;
+      }
+
+      .page-content {
+        padding: 80px 0 30px;
+      }
+
+      .property-listings,
+      .auction-timer,
+      .live-bidding,
+      .filter-section,
+      .help-section {
+        padding: 20px;
+      }
+
+      .property-card h6 {
+        font-size: 1.1rem;
+      }
+
+      .timer {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .heading-section h4 {
+        font-size: 1.5rem;
+      }
+
+      #map {
+        height: 300px;
+      }
+
+      .property-card .property-image {
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="index.html" class="logo">
+              <img src="assets/images/logo.png" alt="Propella Logo">
+            </a>
+            <!-- ***** Logo End ***** -->
+
+            
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Content Start ***** -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+          <!-- ***** Bidding & Auction Section Start ***** -->
+          <div class="bidding-auction">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="heading-section" data-aos="fade-up">
+                  <h4><em>Bidding & Auction</em> Properties</h4>
+                </div>
+              </div>
+
+              <!-- Map Section -->
+              <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
+                <div id="map"></div>
+              </div>
+
+              <div class="row">
+                <!-- Filter Section -->
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                  <div class="filter-section">
+                    <h5>Filter Properties</h5>
+                    
+                    <div class="filter-group">
+                      <label for="property-type">Property Type</label>
+                      <select id="property-type" class="filter-control">
+                        <option value="all">All Types</option>
+                        <option value="residential">Residential</option>
+                        <option value="commercial">Commercial</option>
+                        <option value="land">Land</option>
+                        <option value="industrial">Industrial</option>
+                      </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                      <label for="property-status">Auction Status</label>
+                      <select id="property-status" class="filter-control">
+                        <option value="all">All Statuses</option>
+                        <option value="active">Active</option>
+                        <option value="upcoming">Upcoming</option>
+                        <option value="ended">Ended</option>
+                      </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                      <label for="price-range">Price Range (ETH)</label>
+                      <div class="filter-range">
+                        <input type="number" id="min-price" class="filter-control" placeholder="Min" min="0">
+                        <span>to</span>
+                        <input type="number" id="max-price" class="filter-control" placeholder="Max" min="0">
+                      </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                      <label for="bedrooms">Bedrooms</label>
+                      <select id="bedrooms" class="filter-control">
+                        <option value="any">Any</option>
+                        <option value="1">1+</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
+                        <option value="5">5+</option>
+                      </select>
+                    </div>
+                    
+                    <button class="filter-apply" id="apply-filters">Apply Filters</button>
+                    <button class="filter-apply mt-2" id="reset-filters" style="background: var(--border);">Reset</button>
+                  </div>
+                </div>
+
+                <!-- Property Listings -->
+                <div class="col-lg-8" data-aos="fade-up" data-aos-delay="300">
+                  <div class="property-listings">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                      <h5>Properties for Auction</h5>
+                      <div class="sort-control">
+                        <select id="sort-by" class="filter-control" style="width: auto;">
+                          <option value="newest">Newest First</option>
+                          <option value="oldest">Oldest First</option>
+                          <option value="price-low">Price: Low to High</option>
+                          <option value="price-high">Price: High to Low</option>
+                          <option value="ending">Ending Soonest</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="row" id="property-listings-container">
+                      <!-- Property 1 -->
+                      <div class="col-md-6 mb-4" data-type="residential" data-status="active" data-price="10" data-bedrooms="3" data-end="24">
+                        <div class="property-card">
+                          <div class="property-image">
+                            <img src="assets/images/House1.jpg" alt="Nithya Aishwaryam">
+                            <span class="property-badge">Active</span>
+                          </div>
+                          <div class="property-info">
+                            <h6>Nithya Aishwaryam</h6>
+                            <div class="property-meta">
+                              <span><i class="fas fa-map-marker-alt"></i> Ramapuram</span>
+                              <span><i class="fas fa-home"></i> Residential</span>
+                              <span><i class="fas fa-bed"></i> 3 Beds</span>
+                            </div>
+                            <div class="property-price">
+                              Current Bid: <span>10 ETH</span>
+                            </div>
+                            <div class="bid-progress">
+                              <div class="bid-progress-bar" style="width: 60%;" data-progress="60%"></div>
+                            </div>
+                            <button class="bid-button" data-bs-toggle="modal" data-bs-target="#bidModal" data-property="Nithya Aishwaryam" data-minbid="11">
+                              Place Bid
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Property 2 -->
+                      <div class="col-md-6 mb-4" data-type="commercial" data-status="active" data-price="15" data-bedrooms="2" data-end="48">
+                        <div class="property-card">
+                          <div class="property-image">
+                            <img src="assets/images/House3.jpg" alt="Sridar Illam">
+                            <span class="property-badge">Active</span>
+                          </div>
+                          <div class="property-info">
+                            <h6>Sridar Illam</h6>
+                            <div class="property-meta">
+                              <span><i class="fas fa-map-marker-alt"></i> Ramapuram</span>
+                              <span><i class="fas fa-building"></i> Commercial</span>
+                              <span><i class="fas fa-bed"></i> 2 Beds</span>
+                            </div>
+                            <div class="property-price">
+                              Current Bid: <span>15 ETH</span>
+                            </div>
+                            <div class="bid-progress">
+                              <div class="bid-progress-bar" style="width: 40%;" data-progress="40%"></div>
+                            </div>
+                            <button class="bid-button" data-bs-toggle="modal" data-bs-target="#bidModal" data-property="Sridar Illam" data-minbid="16">
+                              Place Bid
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Property 3 -->
+                      <div class="col-md-6 mb-4" data-type="residential" data-status="upcoming" data-price="25" data-bedrooms="4" data-end="72">
+                        <div class="property-card">
+                          <div class="property-image">
+                            <img src="assets/images/House4.jpg" alt="Sumitra">
+                            <span class="property-badge" style="background: #f39c12;">Upcoming</span>
+                          </div>
+                          <div class="property-info">
+                            <h6>Sumitra</h6>
+                            <div class="property-meta">
+                              <span><i class="fas fa-map-marker-alt"></i> Meenambakkam</span>
+                              <span><i class="fas fa-home"></i> Residential</span>
+                              <span><i class="fas fa-bed"></i> 4 Beds</span>
+                            </div>
+                            <div class="property-price">
+                              Starting Bid: <span>25 ETH</span>
+                            </div>
+                            <div class="bid-progress">
+                              <div class="bid-progress-bar" style="width: 0%;" data-progress="Not started"></div>
+                            </div>
+                            <button class="bid-button" style="background: var(--border);" disabled>
+                              Auction Starts Soon
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Property 4 -->
+                      <div class="col-md-6 mb-4" data-type="land" data-status="active" data-price="8" data-bedrooms="0" data-end="12">
+                        <div class="property-card">
+                          <div class="property-image">
+                            <img src="assets/images/House5.jpg" alt="Balakrishnan">
+                            <span class="property-badge">Active</span>
+                          </div>
+                          <div class="property-info">
+                            <h6>Balakrishnan</h6>
+                            <div class="property-meta">
+                              <span><i class="fas fa-map-marker-alt"></i> Pammal</span>
+                              <span><i class="fas fa-tree"></i> Land</span>
+                              <span><i class="fas fa-ruler-combined"></i> 2400 sq.ft</span>
+                            </div>
+                            <div class="property-price">
+                              Current Bid: <span>8 ETH</span>
+                            </div>
+                            <div class="bid-progress">
+                              <div class="bid-progress-bar" style="width: 75%;" data-progress="75%"></div>
+                            </div>
+                            <button class="bid-button" data-bs-toggle="modal" data-bs-target="#bidModal" data-property="Balakrishnan" data-minbid="9">
+                              Place Bid
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Property 5 -->
+                      <div class="col-md-6 mb-4" data-type="residential" data-status="ended" data-price="5" data-bedrooms="2" data-end="0">
+                        <div class="property-card">
+                          <div class="property-image">
+                            <img src="assets/images/image2.jpg" alt="Sandy Illam">
+                            <span class="property-badge" style="background: #e74c3c;">Ended</span>
+                          </div>
+                          <div class="property-info">
+                            <h6>Sandy Illam</h6>
+                            <div class="property-meta">
+                              <span><i class="fas fa-map-marker-alt"></i> Ramapuram</span>
+                              <span><i class="fas fa-home"></i> Residential</span>
+                              <span><i class="fas fa-bed"></i> 2 Beds</span>
+                            </div>
+                            <div class="property-price">
+                              Final Price: <span>5 ETH</span>
+                            </div>
+                            <div class="bid-progress">
+                              <div class="bid-progress-bar" style="width: 100%;" data-progress="Sold"></div>
+                            </div>
+                            <button class="bid-button" style="background: var(--border);" disabled>
+                              Auction Ended
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Property 6 -->
+                      <div class="col-md-6 mb-4" data-type="industrial" data-status="active" data-price="50" data-bedrooms="0" data-end="36">
+                        <div class="property-card">
+                          <div class="property-image">
+                            <img src="assets/images/shead.jpg" alt="Industrial Space">
+                            <span class="property-badge">Active</span>
+                          </div>
+                          <div class="property-info">
+                            <h6>Industrial Space</h6>
+                            <div class="property-meta">
+                              <span><i class="fas fa-map-marker-alt"></i> Guindy</span>
+                              <span><i class="fas fa-industry"></i> Industrial</span>
+                              <span><i class="fas fa-ruler-combined"></i> 10,000 sq.ft</span>
+                            </div>
+                            <div class="property-price">
+                              Current Bid: <span>50 ETH</span>
+                            </div>
+                            <div class="bid-progress">
+                              <div class="bid-progress-bar" style="width: 30%;" data-progress="30%"></div>
+                            </div>
+                            <button class="bid-button" data-bs-toggle="modal" data-bs-target="#bidModal" data-property="Industrial Space" data-minbid="51">
+                              Place Bid
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                      <button class="bid-button" id="load-more" style="max-width: 200px;">
+                        Load More
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+          <!-- ***** Bidding & Auction Section End ***** -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Main Content End ***** -->
+
+  <!-- Bid Modal -->
+  <div class="modal fade bid-modal" id="bidModal" tabindex="-1" aria-labelledby="bidModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bidModalLabel">Place Your Bid</h5>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="bidForm">
+            <div class="mb-3">
+              <label for="propertyName" class="form-label">Property</label>
+              <input type="text" class="form-control" id="propertyName" readonly>
+            </div>
+            <div class="mb-3">
+              <label for="currentBid" class="form-label">Current Bid</label>
+              <input type="text" class="form-control" id="currentBid" readonly>
+            </div>
+            <div class="mb-3">
+              <label for="yourBid" class="form-label">Your Bid (ETH)</label>
+              <input type="number" class="form-control" id="yourBid" min="0" step="0.01" required>
+              <div class="form-text">Minimum bid: <span id="minBid"></span> ETH</div>
+            </div>
+            <div class="mb-3">
+              <label for="walletAddress" class="form-label">Your Wallet Address</label>
+              <input type="text" class="form-control" id="walletAddress" required>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+              <label class="form-check-label" for="agreeTerms">I agree to the <a href="#" style="color: var(--primary);">terms and conditions</a></label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="bid-button" style="background: var(--border);" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" form="bidForm" class="bid-button">Submit Bid</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ***** Footer Start ***** -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <p>Copyright © 2025 <a href="#">Propella</a> Company. All rights reserved.
+            <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a>
+            <br>Developed by <a href="#">Your Company</a>
+          </p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- ***** Footer End ***** -->
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+  <!-- Google Maps API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao&libraries=places&callback=initMap" async defer></script>
+
+  <!-- Custom Script -->
+  <script>
+    // Initialize AOS Animation
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true
+    });
+
+    // Initialize Map
+    function initMap() {
+      const ramapuram = { lat: 12.9716, lng: 80.1496 }; // Ramapuram coordinates
+      const map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 14,
+        center: ramapuram,
+        styles: [
+          {
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#1d2c4d"
+              }
+            ]
+          },
+          {
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#8ec3b9"
+              }
+            ]
+          },
+          {
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#1a3646"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.country",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#4b6878"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.land_parcel",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#64779e"
+              }
+            ]
+          },
+          {
+            "featureType": "administrative.province",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#4b6878"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.man_made",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#334e87"
+              }
+            ]
+          },
+          {
+            "featureType": "landscape.natural",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#023e58"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#283d6a"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#6f9ba5"
+              }
+            ]
+          },
+          {
+            "featureType": "poi",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#1d2c4d"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#023e58"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#3C7680"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#304a7d"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#98a5be"
+              }
+            ]
+          },
+          {
+            "featureType": "road",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#1d2c4d"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#2c6675"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "geometry.stroke",
+            "stylers": [
+              {
+                "color": "#255763"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#b0d5ce"
+              }
+            ]
+          },
+          {
+            "featureType": "road.highway",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#023e58"
+              }
+            ]
+          },
+          {
+            "featureType": "transit",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#98a5be"
+              }
+            ]
+          },
+          {
+            "featureType": "transit",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+              {
+                "color": "#1d2c4d"
+              }
+            ]
+          },
+          {
+            "featureType": "transit.line",
+            "elementType": "geometry.fill",
+            "stylers": [
+              {
+                "color": "#283d6a"
+              }
+            ]
+          },
+          {
+            "featureType": "transit.station",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#3a4762"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+              {
+                "color": "#0e1626"
+              }
+            ]
+          },
+          {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              {
+                "color": "#4e6d70"
+              }
+            ]
+          }
+        ]
+      });
+
+      // Custom marker icon
+      const iconBase = {
+        path: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z",
+        fillColor: "#ff7e5f",
+        fillOpacity: 1,
+        strokeWeight: 0,
+        scale: 1.5,
+        anchor: new google.maps.Point(12, 24)
+      };
+
+      // Add markers for properties
+      const properties = [
+        { 
+          name: 'Nithya Aishwaryam', 
+          location: { lat: 12.9716, lng: 80.1496 }, 
+          type: 'residential',
+          price: '10 ETH',
+          beds: 3,
+          baths: 2,
+          area: '1800 sq.ft'
+        },
+        { 
+          name: 'Sridar Illam', 
+          location: { lat: 12.9720, lng: 80.1500 }, 
+          type: 'commercial',
+          price: '15 ETH',
+          beds: 2,
+          baths: 1,
+          area: '1200 sq.ft'
+        },
+        { 
+          name: 'Sumitra', 
+          location: { lat: 12.9700, lng: 80.1480 }, 
+          type: 'residential',
+          price: '25 ETH',
+          beds: 4,
+          baths: 3,
+          area: '2200 sq.ft'
+        },
+        { 
+          name: 'Balakrishnan', 
+          location: { lat: 12.9730, lng: 80.1510 }, 
+          type: 'land',
+          price: '8 ETH',
+          beds: 0,
+          baths: 0,
+          area: '2400 sq.ft'
+        },
+        { 
+          name: 'Sandy Illam', 
+          location: { lat: 12.9690, lng: 80.1520 }, 
+          type: 'residential',
+          price: '5 ETH',
+          beds: 2,
+          baths: 1,
+          area: '1000 sq.ft'
+        },
+        { 
+          name: 'Industrial Space', 
+          location: { lat: 12.9740, lng: 80.1470 }, 
+          type: 'industrial',
+          price: '50 ETH',
+          beds: 0,
+          baths: 2,
+          area: '10,000 sq.ft'
+        }
+      ];
+
+      const markers = [];
+      const infoWindows = [];
+
+      properties.forEach((property, index) => {
+        const marker = new google.maps.Marker({
+          position: property.location,
+          map: map,
+          title: property.name,
+          icon: iconBase,
+          animation: google.maps.Animation.DROP
+        });
+
+        const contentString = `
+          <div style="color: #333; max-width: 250px;">
+            <h5 style="color: #ff7e5f; margin-bottom: 5px;">${property.name}</h5>
+            <p style="margin: 5px 0;"><strong>Type:</strong> ${property.type.charAt(0).toUpperCase() + property.type.slice(1)}</p>
+            <p style="margin: 5px 0;"><strong>Price:</strong> ${property.price}</p>
+            ${property.beds > 0 ? `<p style="margin: 5px 0;"><strong>Beds:</strong> ${property.beds}</p>` : ''}
+            ${property.baths > 0 ? `<p style="margin: 5px 0;"><strong>Baths:</strong> ${property.baths}</p>` : ''}
+            <p style="margin: 5px 0;"><strong>Area:</strong> ${property.area}</p>
+            <a href="#" style="color: #ff7e5f; text-decoration: none; font-weight: 500;">View Details →</a>
+          </div>
+        `;
+
+        const infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        marker.addListener('click', () => {
+          // Close all other info windows
+          infoWindows.forEach(window => window.close());
+          infowindow.open(map, marker);
+        });
+
+        markers.push(marker);
+        infoWindows.push(infowindow);
+      });
+
+      // Fit bounds to show all markers
+      const bounds = new google.maps.LatLngBounds();
+      markers.forEach(marker => bounds.extend(marker.getPosition()));
+      map.fitBounds(bounds);
+    }
+
+    // Property Filtering
+    document.getElementById('apply-filters').addEventListener('click', function() {
+      const type = document.getElementById('property-type').value;
+      const status = document.getElementById('property-status').value;
+      const minPrice = parseFloat(document.getElementById('min-price').value) || 0;
+      const maxPrice = parseFloat(document.getElementById('max-price').value) || Infinity;
+      const bedrooms = document.getElementById('bedrooms').value;
+      
+      const propertyCards = document.querySelectorAll('#property-listings-container .col-md-6');
+      
+      propertyCards.forEach(card => {
+        const cardType = card.getAttribute('data-type');
+        const cardStatus = card.getAttribute('data-status');
+        const cardPrice = parseFloat(card.getAttribute('data-price'));
+        const cardBedrooms = card.getAttribute('data-bedrooms');
+        
+        const typeMatch = type === 'all' || cardType === type;
+        const statusMatch = status === 'all' || cardStatus === status;
+        const priceMatch = cardPrice >= minPrice && cardPrice <= maxPrice;
+        const bedroomsMatch = bedrooms === 'any' || parseInt(cardBedrooms) >= parseInt(bedrooms);
+        
+        if (typeMatch && statusMatch && priceMatch && bedroomsMatch) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+    
+    // Reset Filters
+    document.getElementById('reset-filters').addEventListener('click', function() {
+      document.getElementById('property-type').value = 'all';
+      document.getElementById('property-status').value = 'all';
+      document.getElementById('min-price').value = '';
+      document.getElementById('max-price').value = '';
+      document.getElementById('bedrooms').value = 'any';
+      
+      const propertyCards = document.querySelectorAll('#property-listings-container .col-md-6');
+      propertyCards.forEach(card => {
+        card.style.display = 'block';
+      });
+    });
+    
+    // Sort Properties
+    document.getElementById('sort-by').addEventListener('change', function() {
+      const sortValue = this.value;
+      const container = document.getElementById('property-listings-container');
+      const items = Array.from(container.children);
+      
+      items.sort((a, b) => {
+        const aPrice = parseFloat(a.getAttribute('data-price'));
+        const bPrice = parseFloat(b.getAttribute('data-price'));
+        const aEnd = parseInt(a.getAttribute('data-end'));
+        const bEnd = parseInt(b.getAttribute('data-end'));
+        
+        switch(sortValue) {
+          case 'newest':
+            return bEnd - aEnd;
+          case 'oldest':
+            return aEnd - bEnd;
+          case 'price-low':
+            return aPrice - bPrice;
+          case 'price-high':
+            return bPrice - aPrice;
+          case 'ending':
+            return aEnd - bEnd;
+          default:
+            return 0;
+        }
+      });
+      
+      // Re-append sorted items
+      items.forEach(item => container.appendChild(item));
+    });
+    
+    // Load More Properties
+    document.getElementById('load-more').addEventListener('click', function() {
+      // In a real app, this would fetch more properties from an API
+      // For demo, we'll just show an alert
+      alert('Loading more properties...');
+    });
+    
+    // Bid Modal
+    const bidModal = document.getElementById('bidModal');
+    if (bidModal) {
+      bidModal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
+        const property = button.getAttribute('data-property');
+        const minBid = button.getAttribute('data-minbid');
+        
+        const modalTitle = bidModal.querySelector('.modal-title');
+        const modalPropertyName = bidModal.querySelector('#propertyName');
+        const modalCurrentBid = bidModal.querySelector('#currentBid');
+        const modalMinBid = bidModal.querySelector('#minBid');
+        const modalYourBid = bidModal.querySelector('#yourBid');
+        
+        modalTitle.textContent = `Bid on ${property}`;
+        modalPropertyName.value = property;
+        modalCurrentBid.value = `${parseInt(minBid) - 1} ETH`;
+        modalMinBid.textContent = minBid;
+        modalYourBid.min = minBid;
+        modalYourBid.value = minBid;
+      });
+    }
+    
+    // Bid Form Submission
+    document.getElementById('bidForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const property = document.getElementById('propertyName').value;
+      const bidAmount = document.getElementById('yourBid').value;
+      const walletAddress = document.getElementById('walletAddress').value;
+      
+      // In a real app, this would submit to your backend
+      console.log(`Bid submitted for ${property}: ${bidAmount} ETH from ${walletAddress}`);
+      
+      // Show success message
+      alert(`Your bid of ${bidAmount} ETH for ${property} has been submitted!`);
+      
+      // Close modal
+      const modal = bootstrap.Modal.getInstance(bidModal);
+      modal.hide();
+    });
+    
+    // Auction Timer
+    function updateAuctionTimers() {
+      const propertyCards = document.querySelectorAll('#property-listings-container .col-md-6');
+      
+      propertyCards.forEach(card => {
+        const endHours = parseInt(card.getAttribute('data-end'));
+        const badge = card.querySelector('.property-badge');
+        const button = card.querySelector('.bid-button');
+        
+        if (endHours > 0) {
+          const countDownDate = new Date();
+          countDownDate.setHours(countDownDate.getHours() + endHours);
+          
+          const now = new Date().getTime();
+          const distance = countDownDate - now;
+          
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          
+          if (distance < 0) {
+            badge.textContent = 'Ended';
+            badge.style.background = '#e74c3c';
+            if (button) {
+              button.disabled = true;
+              button.textContent = 'Auction Ended';
+              button.style.background = 'var(--border)';
+            }
+          }
+        }
+      });
+    }
+    
+    // Update timers every second
+    setInterval(updateAuctionTimers, 1000);
+    updateAuctionTimers();
+    
+    // Simulate Real-time Bidding Updates
+    const properties = ['Nithya Aishwaryam', 'Sridar Illam', 'Sumitra', 'Balakrishnan', 'Industrial Space'];
+    const users = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Henry'];
+    
+    setInterval(() => {
+      const liveBiddingList = document.getElementById('live-bidding-list');
+      if (liveBiddingList) {
+        const property = properties[Math.floor(Math.random() * properties.length)];
+        const user = users[Math.floor(Math.random() * users.length)];
+        const bidAmount = (Math.random() * 20 + 5).toFixed(2);
+        
+        const newBid = document.createElement('li');
+        newBid.innerHTML = `
+          <div class="bid-avatar">${user.charAt(0)}</div>
+          <span>${user} bid <span class="bid-amount">${bidAmount} ETH</span> on ${property}</span>
+          <span class="bid-time">Just now</span>
+        `;
+        
+        liveBiddingList.prepend(newBid);
+        
+        // Limit to 10 items
+        if (liveBiddingList.children.length > 10) {
+          liveBiddingList.removeChild(liveBiddingList.lastChild);
+        }
+      }
+    }, 3000);
+  </script>
+
+</body>
+</html>

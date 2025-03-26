@@ -36,6 +36,7 @@
     body {
       background-color: var(--dark-bg);
       color: var(--light-text);
+      font-family: 'Poppins', sans-serif;
     }
 
     /* Search and Filters Container */
@@ -303,7 +304,220 @@
     .transaction-table tbody tr:nth-child(1) { animation-delay: 0.1s; }
     .transaction-table tbody tr:nth-child(2) { animation-delay: 0.2s; }
     .transaction-table tbody tr:nth-child(3) { animation-delay: 0.3s; }
-    /* Add more as needed */
+    
+    /* Enhanced Transaction Details Modal */
+    .transaction-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+    
+    .modal-content {
+      background-color: #222;
+      margin: 2% auto;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.6);
+      border: 1px solid #333;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #333;
+    }
+    
+    .modal-header h3 {
+      color: var(--primary-color);
+      margin: 0;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .modal-header .tx-type-badge {
+      background: rgba(255, 126, 95, 0.2);
+      color: var(--primary-color);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .close-modal {
+      background: none;
+      border: none;
+      color: #aaa;
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: color 0.3s;
+      line-height: 1;
+    }
+    
+    .close-modal:hover {
+      color: #fff;
+    }
+    
+    .transfer-details {
+      background: #2a2a2a;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .transfer-direction {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .transfer-arrow {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .party {
+      width: 45%;
+    }
+    
+    .party-you {
+      text-align: right;
+    }
+    
+    .party-label {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+    
+    .party-address {
+      font-family: monospace;
+      word-break: break-all;
+      background: #333;
+      padding: 8px 12px;
+      border-radius: 6px;
+      display: inline-block;
+      max-width: 100%;
+    }
+    
+    .tx-amount {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 15px 0;
+      color: var(--primary-color);
+    }
+    
+    .tx-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .meta-group {
+      margin-bottom: 15px;
+    }
+    
+    .meta-label {
+      color: #aaa;
+      font-size: 0.85rem;
+      margin-bottom: 5px;
+    }
+    
+    .meta-value {
+      font-size: 0.95rem;
+      word-break: break-all;
+    }
+    
+    .tx-hash {
+      background: #333;
+      padding: 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      word-break: break-all;
+      margin-top: 5px;
+    }
+    
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #333;
+    }
+    
+    .modal-btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .btn-copy {
+      background: #333;
+      color: #fff;
+      border: none;
+    }
+    
+    .btn-copy:hover {
+      background: #444;
+    }
+    
+    .btn-explorer {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+    }
+    
+    .btn-explorer:hover {
+      background: #ff6a4a;
+    }
+    
+    @media (max-width: 768px) {
+      .transfer-direction {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .party {
+        width: 100%;
+        text-align: center !important;
+      }
+      
+      .transfer-arrow {
+        position: relative;
+        left: auto;
+        transform: rotate(90deg);
+        margin: 10px 0;
+      }
+      
+      .tx-meta {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
@@ -361,8 +575,6 @@
                   <p class="text-muted">View and manage your transaction history</p>
                 </div>
               </div>
-
-              
 
               <!-- Search and Filters -->
               <div class="col-lg-12">
@@ -430,10 +642,10 @@
                         <td>TX12345678</td>
                         <td>2023-10-01 14:30:22</td>
                         <td>10.5 ETH</td>
-                        <td>Purchase</td>
+                        <td>Transfer</td>
                         <td><span class="status-badge status-completed">Completed</span></td>
                         <td>
-                          <button class="btn-action btn-view">
+                          <button class="btn-action btn-view" data-tx-id="TX12345678">
                             <i class="fas fa-eye"></i> View
                           </button>
                         </td>
@@ -442,10 +654,10 @@
                         <td>TX78901234</td>
                         <td>2023-09-28 09:15:47</td>
                         <td>5.25 ETH</td>
-                        <td>Sale</td>
+                        <td>Transfer</td>
                         <td><span class="status-badge status-pending">Pending</span></td>
                         <td>
-                          <button class="btn-action btn-view">
+                          <button class="btn-action btn-view" data-tx-id="TX78901234">
                             <i class="fas fa-eye"></i> View
                           </button>
                         </td>
@@ -457,7 +669,7 @@
                         <td>Transfer</td>
                         <td><span class="status-badge status-failed">Failed</span></td>
                         <td>
-                          <button class="btn-action btn-view">
+                          <button class="btn-action btn-view" data-tx-id="TX34567890">
                             <i class="fas fa-eye"></i> View
                           </button>
                         </td>
@@ -469,7 +681,7 @@
                         <td>Withdrawal</td>
                         <td><span class="status-badge status-processing">Processing</span></td>
                         <td>
-                          <button class="btn-action btn-view">
+                          <button class="btn-action btn-view" data-tx-id="TX90123456">
                             <i class="fas fa-eye"></i> View
                           </button>
                         </td>
@@ -481,7 +693,7 @@
                         <td>Refund</td>
                         <td><span class="status-badge status-completed">Completed</span></td>
                         <td>
-                          <button class="btn-action btn-view">
+                          <button class="btn-action btn-view" data-tx-id="TX56789012">
                             <i class="fas fa-eye"></i> View
                           </button>
                         </td>
@@ -524,6 +736,81 @@
   </div>
   <!-- ***** Main Content End ***** -->
 
+  <!-- Enhanced Transaction Details Modal -->
+  <div class="transaction-modal" id="transactionModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>
+          <i class="fas fa-exchange-alt"></i>
+          Transaction Details
+          <span class="tx-type-badge" id="modal-tx-type">Transfer</span>
+        </h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      
+      <div class="transfer-details">
+        <div class="transfer-direction">
+          <div class="party party-them">
+            <div class="party-label">From</div>
+            <div class="party-address" id="modal-sender">0x1a2b...3c4d</div>
+          </div>
+          
+          <div class="transfer-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+          
+          <div class="party party-you">
+            <div class="party-label">To</div>
+            <div class="party-address" id="modal-receiver">0x5e6f...7g8h</div>
+          </div>
+        </div>
+        
+        <div class="tx-amount" id="modal-tx-amount">10.5 ETH</div>
+        
+        <div class="tx-meta">
+          <div class="meta-group">
+            <div class="meta-label">Transaction ID</div>
+            <div class="meta-value" id="modal-tx-id">TX12345678</div>
+          </div>
+          
+          <div class="meta-group">
+            <div class="meta-label">Date & Time</div>
+            <div class="meta-value" id="modal-tx-date">2023-10-01 14:30:22</div>
+          </div>
+          
+          <div class="meta-group">
+            <div class="meta-label">Status</div>
+            <div class="meta-value" id="modal-tx-status"><span class="status-badge status-completed">Completed</span></div>
+          </div>
+          
+          <div class="meta-group">
+            <div class="meta-label">Network Fee</div>
+            <div class="meta-value" id="modal-tx-fee">0.0012 ETH</div>
+          </div>
+          
+          <div class="meta-group">
+            <div class="meta-label">Transaction Hash</div>
+            <div class="tx-hash" id="modal-tx-hash">0x4a7b91c9d96b5c1c3e4d8b7a6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6</div>
+          </div>
+          
+          <div class="meta-group">
+            <div class="meta-label">Notes</div>
+            <div class="meta-value" id="modal-tx-notes">Payment for NFT purchase</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="modal-btn btn-copy" id="btn-copy-hash">
+          <i class="fas fa-copy"></i> Copy Hash
+        </button>
+        <button class="modal-btn btn-explorer" id="btn-view-explorer">
+          <i class="fas fa-external-link-alt"></i> View on Explorer
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ***** Footer Start ***** -->
   <footer>
     <div class="container">
@@ -547,6 +834,80 @@
 
   <!-- Transaction History Script -->
   <script>
+    // Enhanced transaction data with more transfer details
+    const transactions = {
+      "TX12345678": {
+        id: "TX12345678",
+        date: "2023-10-01 14:30:22",
+        amount: "10.5 ETH",
+        type: "Transfer",
+        status: "completed",
+        fee: "0.0012 ETH",
+        hash: "0x4a7b91c9d96b5c1c3e4d8b7a6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6",
+        sender: "0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t",
+        senderName: "Your Wallet",
+        receiver: "0x5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1a2b3c4d",
+        receiverName: "NFT Marketplace",
+        notes: "Payment for CryptoPunk #1234 purchase"
+      },
+      "TX78901234": {
+        id: "TX78901234",
+        date: "2023-09-28 09:15:47",
+        amount: "5.25 ETH",
+        type: "Transfer",
+        status: "pending",
+        fee: "0.0011 ETH",
+        hash: "0x9a8b7c6d5e4f3g2h1i0j9k8l7m6n5o4p3q2r1s0t",
+        sender: "0x5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1a2b3c4d",
+        senderName: "Buyer Wallet",
+        receiver: "0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t",
+        receiverName: "Your Wallet",
+        notes: "Payment for Bored Ape #4567 sale"
+      },
+      "TX34567890": {
+        id: "TX34567890",
+        date: "2023-09-25 16:45:12",
+        amount: "2.0 ETH",
+        type: "Transfer",
+        status: "failed",
+        fee: "0.0015 ETH",
+        hash: "0x3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1a2b",
+        sender: "0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t",
+        senderName: "Your Wallet",
+        receiver: "0x9i8j7k6l5m4n3o2p1q0r9s8t7u6v5w4x3y2z1",
+        receiverName: "Friend's Wallet",
+        notes: "Failed transfer to friend - insufficient gas"
+      },
+      "TX90123456": {
+        id: "TX90123456",
+        date: "2023-09-20 11:20:33",
+        amount: "7.8 ETH",
+        type: "Withdrawal",
+        status: "processing",
+        fee: "0.002 ETH",
+        hash: "0x7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6",
+        sender: "0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t",
+        senderName: "Your Wallet",
+        receiver: "0xexchange1234567890abcdefghijklmnopqr",
+        receiverName: "Binance Exchange",
+        notes: "Withdrawal to exchange for trading"
+      },
+      "TX56789012": {
+        id: "TX56789012",
+        date: "2023-09-15 19:05:18",
+        amount: "3.5 ETH",
+        type: "Refund",
+        status: "completed",
+        fee: "0.0008 ETH",
+        hash: "0x2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1a",
+        sender: "0xmarketplace1234567890abcdefghijklmno",
+        senderName: "OpenSea Escrow",
+        receiver: "0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t",
+        receiverName: "Your Wallet",
+        notes: "Refund for canceled NFT order"
+      }
+    };
+
     $(document).ready(function() {
       // Set default dates (last 30 days)
       const today = new Date();
@@ -617,33 +978,111 @@
       // Export functionality
       document.querySelector('.btn-export').addEventListener('click', function() {
         alert('Export functionality would be implemented here');
-        // In a real implementation, this would generate a CSV file
       });
       
-      // Print functionality
-      document.querySelectorAll('.btn-export')[1].addEventListener('click', function() {
-        window.print();
-      });
+      // Enhanced Modal Functions
+      const modal = document.getElementById('transactionModal');
+      const closeModal = document.querySelector('.close-modal');
       
-      // Pagination
-      document.querySelectorAll('.pagination button:not(.disabled)').forEach(button => {
+      // Function to format addresses
+      const formatAddress = (addr, isYou = false) => {
+        if (isYou) return "Your Wallet";
+        if (addr.length > 14) {
+          return `${addr.substring(0, 6)}...${addr.substring(addr.length - 4)}`;
+        }
+        return addr;
+      };
+      
+      // Function to determine if an address is "yours" (simplified for demo)
+      const isYourAddress = (addr) => {
+        return addr === "0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t";
+      };
+      
+      // Open modal with transfer details
+      document.querySelectorAll('.btn-view').forEach(button => {
         button.addEventListener('click', function() {
-          if (!this.classList.contains('active')) {
-            document.querySelector('.pagination button.active').classList.remove('active');
-            this.classList.add('active');
-            // In a real implementation, this would load the new page of results
-            alert('Pagination would load page ' + this.textContent);
+          const txId = this.getAttribute('data-tx-id');
+          const txData = transactions[txId];
+          
+          if (txData) {
+            // Determine sender/receiver based on transaction type
+            const isOutgoing = isYourAddress(txData.sender);
+            const fromAddress = isOutgoing ? txData.sender : txData.receiver;
+            const toAddress = isOutgoing ? txData.receiver : txData.sender;
+            const fromName = isOutgoing ? "Your Wallet" : txData.senderName;
+            const toName = isOutgoing ? txData.receiverName : "Your Wallet";
+            
+            // Populate modal with transaction data
+            document.getElementById('modal-tx-id').textContent = txData.id;
+            document.getElementById('modal-tx-date').textContent = txData.date;
+            document.getElementById('modal-tx-amount').textContent = txData.amount;
+                        document.getElementById('modal-tx-type').textContent = txData.type;
+            
+            // Set status with appropriate badge
+            const statusElement = document.getElementById('modal-tx-status');
+            statusElement.innerHTML = '';
+            const statusBadge = document.createElement('span');
+            statusBadge.className = `status-badge status-${txData.status}`;
+            statusBadge.textContent = txData.status.charAt(0).toUpperCase() + txData.status.slice(1);
+            statusElement.appendChild(statusBadge);
+            
+            document.getElementById('modal-tx-fee').textContent = txData.fee;
+            document.getElementById('modal-tx-hash').textContent = txData.hash;
+            document.getElementById('modal-tx-notes').textContent = txData.notes;
+            
+            // Set sender/receiver information
+            document.getElementById('modal-sender').textContent = formatAddress(fromAddress, isYourAddress(fromAddress));
+            document.getElementById('modal-receiver').textContent = formatAddress(toAddress, isYourAddress(toAddress));
+            
+            // Show direction indicator based on transaction type
+            const arrow = document.querySelector('.transfer-arrow i');
+            if (isOutgoing) {
+              arrow.className = 'fas fa-arrow-right';
+              arrow.parentElement.setAttribute('title', 'Outgoing Transfer');
+            } else {
+              arrow.className = 'fas fa-arrow-left';
+              arrow.parentElement.setAttribute('title', 'Incoming Transfer');
+              arrow.parentElement.style.color = '#4caf50'; // Green for incoming
+            }
+            
+            // Show modal
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
           }
         });
       });
       
-      // View transaction details
-      document.querySelectorAll('.btn-view').forEach(button => {
-        button.addEventListener('click', function() {
-          const transactionId = this.closest('tr').cells[0].textContent;
-          alert('Viewing details for transaction: ' + transactionId);
-          // In a real implementation, this would open a modal or navigate to a details page
+      // Close modal
+      closeModal.addEventListener('click', function() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      });
+      
+      // Close modal when clicking outside
+      window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      });
+      
+      // Copy transaction hash
+      document.getElementById('btn-copy-hash').addEventListener('click', function() {
+        const hash = document.getElementById('modal-tx-hash').textContent;
+        navigator.clipboard.writeText(hash).then(() => {
+          const originalText = this.innerHTML;
+          this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+          setTimeout(() => {
+            this.innerHTML = originalText;
+          }, 2000);
         });
+      });
+      
+      // View on explorer
+      document.getElementById('btn-view-explorer').addEventListener('click', function() {
+        const hash = document.getElementById('modal-tx-hash').textContent;
+        alert(`In a real implementation, this would open ${hash} on a blockchain explorer like Etherscan`);
+        // window.open(`https://etherscan.io/tx/${hash}`, '_blank');
       });
     });
   </script>
