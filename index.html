@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>NFT SHIT</title>
@@ -83,6 +83,72 @@
       .container {
         padding-top: 10px;
       }
+
+      /* Mobile menu styles */
+      .menu-trigger {
+        display: none;
+        cursor: pointer;
+        padding: 10px;
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        z-index: 1000;
+      }
+
+      .menu-trigger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+      }
+
+      .menu-trigger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .menu-trigger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-trigger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+
+      /* Responsive styles */
+      @media (max-width: 992px) {
+        .menu-trigger {
+          display: block;
+        }
+
+        .main-nav ul {
+          display: none;
+          position: fixed;
+          top: 0;
+          right: 0;
+          width: 250px;
+          height: 100vh;
+          background-color: #1f2122;
+          flex-direction: column;
+          padding: 80px 20px 20px;
+          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+          z-index: 999;
+          transition: all 0.3s ease;
+        }
+
+        .main-nav ul.show {
+          display: flex;
+        }
+
+        .main-nav ul li {
+          margin: 15px 0;
+        }
+
+        .main-nav {
+          justify-content: center;
+        }
+      }
     </style>
 </head>
 
@@ -108,8 +174,8 @@
     </a>
   </div>
 
-  <!-- Update the header area in your HTML -->
-<header class="header-area header-sticky">
+  <!-- Header Area -->
+  <header class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -121,17 +187,7 @@
                 </div>
                 
                 <nav class="main-nav">
-                    <ul>
-                        <!-- menu items -->
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-</header>
-                
-                <nav class="main-nav">
-                    <ul>
+                    <ul id="mobile-menu">
                         <li><a href="Myproperties.html"><i class="fa-solid fa-file"></i> My Properties</a></li>
                         <li><a href="Tranferprop.html"><i class="fa-solid fa-share"></i> Transfer</a></li>
                         <li><a href="Transferhistory.html"><i class="fa-solid fa-address-book"></i> History</a></li>
@@ -143,7 +199,7 @@
             </div>
         </div>
     </div>
-</header>
+  </header>
 
 
   <!-- ***** Header Area End ***** -->
@@ -219,7 +275,7 @@
                             </div>
 
                             <div class="col-lg-3 col-sm-6">
-                                <a href="https://www.legalkart.com/talk-to-lawyer?utm_source=google&utm_medium=searchads&utm_campaign=legal_talk_general&utm_source=google&utm_medium=cpc&utm_id=18636247563&utm_content=148192371808&utm_term=legal%20consultation&creativeId=629150004679&gclid=CjwKCAjwnPS-BhBxEiwAZjMF0pjEUr-fzhGQKBRZeK1ARVGmRI62W0XueY-AZJo81se1ENGbGaeNPRoCWOYQAvD_BwE&gad_source=1" class="item-link">
+                                <a href="legal.html" class="item-link">
                                     <div class="item">
                                         <i class="fa-solid fa-scale-balanced fa-4x"></i>
                                         <h4>Legal Consultation</h4>
@@ -279,73 +335,50 @@
   <script src="assets/js/custom.js"></script>
 
   <script>
-    // AI Assistant button functionality
-    document.getElementById('ai-assistant-btn').addEventListener('click', function(e) {
-        e.preventDefault();
-        if (!window.Chatling) {
-            const script = document.createElement('script');
-            script.src = 'https://chatling.ai/js/embed.js';
-            script.async = true;
-            script.id = 'chatling-embed-script';
-            script.setAttribute('data-id', '7291819981');
-            document.body.appendChild(script);
-            window.chtlConfig = { chatbotId: "7291819981" };
-        }
-        else if (window.Chatling.open) {
-            window.Chatling.open();
-        }
-    });
-  </script>
-
-<script>
-  // Mobile menu toggle functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const menuTrigger = document.querySelector('.menu-trigger');
-    const mainNav = document.querySelector('.main-nav ul');
-    
-    // Initialize menu state
-    let isMenuOpen = false;
-    
-    // Toggle menu function
-    function toggleMenu() {
-      isMenuOpen = !isMenuOpen;
-      menuTrigger.classList.toggle('active', isMenuOpen);
-      mainNav.classList.toggle('active', isMenuOpen);
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuTrigger = document.querySelector('.menu-trigger');
+      const mobileMenu = document.getElementById('mobile-menu');
       
-      // Prevent scrolling when menu is open
-      document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-    }
-    
-    // Add click event
-    menuTrigger.addEventListener('click', toggleMenu);
-    
-    // Close menu when clicking on a link
-    document.querySelectorAll('.main-nav ul li a').forEach(link => {
-      link.addEventListener('click', function() {
-        if (window.innerWidth <= 992) {
-          isMenuOpen = false;
-          menuTrigger.classList.remove('active');
-          mainNav.classList.remove('active');
+      // Toggle mobile menu
+      menuTrigger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('show');
+        
+        // Toggle body overflow
+        if (this.classList.contains('active')) {
+          document.body.style.overflow = 'hidden';
+        } else {
           document.body.style.overflow = '';
         }
       });
-    });
-    
-    // Make header sticky on scroll
-    window.addEventListener('scroll', function() {
-      const header = document.querySelector('.header-area');
+      
+      // Close menu when clicking on a link (for mobile)
+      const navLinks = document.querySelectorAll('#mobile-menu li a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          if (window.innerWidth <= 992) {
+            menuTrigger.classList.remove('active');
+            mobileMenu.classList.remove('show');
+            document.body.style.overflow = '';
+          }
+        });
+      });
+      
+      // Make header sticky on scroll
+      window.addEventListener('scroll', function() {
+        const header = document.querySelector('.header-area');
+        if (window.scrollY > 50) {
+          header.classList.add('header-sticky');
+        } else {
+          header.classList.remove('header-sticky');
+        }
+      });
+      
+      // Initialize sticky header if not at top
       if (window.scrollY > 50) {
-        header.classList.add('header-sticky');
-      } else {
-        header.classList.remove('header-sticky');
+        document.querySelector('.header-area').classList.add('header-sticky');
       }
     });
-    
-    // Initialize sticky header if not at top
-    if (window.scrollY > 50) {
-      document.querySelector('.header-area').classList.add('header-sticky');
-    }
-  });
-</script>
+  </script>
 </body>
 </html>
