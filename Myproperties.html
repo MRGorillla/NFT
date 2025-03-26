@@ -1,180 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <title>NFT SHIT</title>
+    <title>Property Portfolio</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-
-  </head>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1f2122;
+            color: #ec6090;
+            padding: 20px;
+        }
+        
+        .logo {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .logo img {
+            max-width: 200px;
+        }
+        
+        .heading {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e75e8d;
+        }
+        
+        .property-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .property-item {
+            background: #27292a;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .property-image {
+            width: 100%;
+            height: 250px;
+        }
+        
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .property-info {
+            padding: 20px;
+        }
+        
+        .property-info h3 {
+            margin-top: 0;
+            color: #e75e8d;
+        }
+        
+        .property-info .location {
+            color: #666;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .property-details {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #ec6090;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px 0;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
 
 <body>
 
-  <!-- ***** Preloader Start ***** -->
-  <div id="js-preloader" class="js-preloader">
-    <div class="preloader-inner">
-      <span class="dot"></span>
-      <div class="dots">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
+  <div class="logo">
+    <a href="index.html">
+      <img src="assets/images/logo.png" alt="Property Portfolio">
+    </a>
   </div>
-  <!-- ***** Preloader End ***** -->
 
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
-                        <img src="assets/images/logo.png" alt="">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="browse.html">Browse</a></li>
-                        <li><a href="details.html" class="active">Details</a></li>
-                        <li><a href="streams.html">Streams</a></li>
-                        <li><a href="profile.html">Profile <img src="assets/images/profile-header.jpg" alt=""></a></li>
-                    </ul>   
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
-            </div>
-        </div>
-    </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
+  <h1 class="heading"><em>My</em> Properties</h1>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="page-content">
-
-     
-<!-- ***** Details Start ***** -->
-<div class="other-games">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="heading-section">
-        <h4><em>My</em> Properties:</h4>
-      </div>
-    </div>
+  <div class="property-container">
     
-    <a href="Property1.html" class="col-lg-6">
-      <div class="item">
-        <img src="assets/images/game-01.jpg" alt="" class="templatemo-item">
-        <h3>Nithya Aishwaryam</h3><span><br>Lakshmi nagar 1st street, nanganallur</span>
-        <ul>
-          <li><i class="fa fa-star"></i> 4.8</li>
-          <li><i class="fa-solid fa-indian-rupee-sign"></i></i> 2L</li>
-        </ul>
+    <!-- Property 1 -->
+    <div class="property-item">
+      <div class="property-image">
+        <a href="Property1.html">
+          <img src="assets/images/House1.jpg" alt="Nithya Aishwaryam">
+        </a>
       </div>
-    </a>
-    
-    <a href="Property3.html" class="col-lg-6">
-      <div class="item">
-        <img src="assets/images/game-02.jpg" alt="" class="templatemo-item">
-        <h3>Sridar</h3><span><br>Nesapaakam chennai</span>
-        <ul>
-          <li><i class="fa fa-star"></i> 2.8</li>
-          <li><i class="fa-solid fa-indian-rupee-sign"></i></i> 5L</li>
-        </ul>
-      </div>
-    </a>
-    
-    <a href="Property2.html" class="col-lg-6">
-      <div class="item">
-        <img src="assets/images/game-03.jpg" alt="" class="templatemo-item">
-        <h3>Sumitra</h3><span><br>meenambakkam chennai</span>
-        <ul>
-          <li><i class="fa fa-star"></i> 6.8</li>
-          <li><i class="fa-solid fa-indian-rupee-sign"></i></i> 1CR</li>
-        </ul>
-      </div>
-    </a>
-    
-    <a href="Property4.html" class="col-lg-6">
-      <div class="item">
-        <img src="assets/images/game-02.jpg" alt="" class="templatemo-item">
-        <h3>Balakrishnan</h3><span><br>Pammal</span>
-        <ul>
-          <li><i class="fa fa-star"></i> 4.8</li>
-          <li><i class="fa-solid fa-indian-rupee-sign"></i></i> 6L</li>
-        </ul>
-      </div>
-    </a>
-    
-    <a href="Property5.html" class="col-lg-6">
-      <div class="item">
-        <img src="assets/images/game-03.jpg" alt="" class="templatemo-item">
-        <h3>Sandy Illam</h3><span><br>Ramapuram</span>
-        <ul>
-          <li><i class="fa fa-star"></i> 4.6</li>
-          <<li><i class="fa-solid fa-indian-rupee-sign"></i></i>1.5L </li>
-        </ul>
-      </div>
-    </a>
-   
-          <!-- ***** Details End ***** -->
-
-          <!-- ***** Other Start ***** -->
-          
-          <!-- ***** Other End ***** -->
-
+      <div class="property-info">
+        <h3>Nithya Aishwaryam</h3>
+        <span class="location"><i class="fa fa-map-marker-alt"></i> Lakshmi nagar 1st street, nanganallur</span>
+        <div class="property-details">
+          <span class="detail-item"><i class="fa fa-star"></i> 4.8</span>
+          <span class="detail-item"><i class="fa-solid fa-indian-rupee-sign"></i> 2L</span>
+          <span class="detail-item"><i class="fa fa-bed"></i> 3 Beds</span>
+          <span class="detail-item"><i class="fa fa-bath"></i> 2 Baths</span>
         </div>
       </div>
     </div>
+    
+    <!-- Property 2 -->
+    <div class="property-item">
+      <div class="property-image">
+        <a href="Property3.html">
+          <img src="assets/images/Image2.jpg" alt="Sridar">
+        </a>
+      </div>
+      <div class="property-info">
+        <h3>Sridar</h3>
+        <span class="location"><i class="fa fa-map-marker-alt"></i> Nesapaakam chennai</span>
+        <div class="property-details">
+          <span class="detail-item"><i class="fa fa-star"></i> 2.8</span>
+          <span class="detail-item"><i class="fa-solid fa-indian-rupee-sign"></i> 5L</span>
+          <span class="detail-item"><i class="fa fa-bed"></i> 2 Beds</span>
+          <span class="detail-item"><i class="fa fa-bath"></i> 1 Bath</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Property 3 -->
+    <div class="property-item">
+      <div class="property-image">
+        <a href="Property2.html">
+          <img src="assets/images/House3.jpg" alt="Sumitra">
+        </a>
+      </div>
+      <div class="property-info">
+        <h3>Sumitra</h3>
+        <span class="location"><i class="fa fa-map-marker-alt"></i> meenambakkam chennai</span>
+        <div class="property-details">
+          <span class="detail-item"><i class="fa fa-star"></i> 4.5</span>
+          <span class="detail-item"><i class="fa-solid fa-indian-rupee-sign"></i> 1CR</span>
+          <span class="detail-item"><i class="fa fa-bed"></i> 5 Beds</span>
+          <span class="detail-item"><i class="fa fa-bath"></i> 4 Baths</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Property 4 -->
+    <div class="property-item">
+      <div class="property-image">
+        <a href="Property4.html">
+          <img src="assets/images/House4.jpg" alt="Balakrishnan">
+        </a>
+      </div>
+      <div class="property-info">
+        <h3>Balakrishnan</h3>
+        <span class="location"><i class="fa fa-map-marker-alt"></i> Pammal</span>
+        <div class="property-details">
+          <span class="detail-item"><i class="fa fa-star"></i> 4.8</span>
+          <span class="detail-item"><i class="fa-solid fa-indian-rupee-sign"></i> 6L</span>
+          <span class="detail-item"><i class="fa fa-bed"></i> 3 Beds</span>
+          <span class="detail-item"><i class="fa fa-bath"></i> 2 Baths</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Property 5 -->
+    <div class="property-item">
+      <div class="property-image">
+        <a href="Property5.html">
+          <img src="assets/images/House5.jpg" alt="Sandy Illam">
+        </a>
+      </div>
+      <div class="property-info">
+        <h3>Sandy Illam</h3>
+        <span class="location"><i class="fa fa-map-marker-alt"></i> Ramapuram</span>
+        <div class="property-details">
+          <span class="detail-item"><i class="fa fa-star"></i> 4.6</span>
+          <span class="detail-item"><i class="fa-solid fa-indian-rupee-sign"></i> 1.5L</span>
+          <span class="detail-item"><i class="fa fa-bed"></i> 2 Beds</span>
+          <span class="detail-item"><i class="fa fa-bath"></i> 1 Bath</span>
+        </div>
+      </div>
+    </div>
+    
   </div>
-  
+
   <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved. 
-          
-          <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a></p>
-        </div>
-      </div>
-    </div>
+    <p>Copyright © 2023 Property Portfolio. All rights reserved.</p>
   </footer>
 
-
-  <!-- Scripts -->
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/tabs.js"></script>
-  <script src="assets/js/popup.js"></script>
-  <script src="assets/js/custom.js"></script>
-
-
-  </body>
-
+</body>
 </html>

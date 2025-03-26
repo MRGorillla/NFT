@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Transfer Property - Propella NFT</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <style>
+    /* CAPTCHA Container */
+    .captcha-container {
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .captcha-code {
+      font-size: 24px;
+      font-weight: bold;
+      background: #333;
+      padding: 10px;
+      border-radius: 5px;
+      color: #fff;
+      letter-spacing: 3px;
+      user-select: none;
+    }
+
+    .captcha-input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #444;
+      border-radius: 5px;
+      background: #222;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .captcha-check-btn {
+      padding: 12px 20px;
+      background: #ff7e5f;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .captcha-check-btn:hover {
+      background: #feb47b;
+      transform: translateY(-2px);
+    }
+
+    /* Property Details Card */
+    .property-details {
+      background: #1a1a1a;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 20px;
+      border: 1px solid #2a2a2a;
+    }
+
+    .property-details h5 {
+      color: #ff7e5f;
+      font-size: 22px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 10px;
+    }
+
+    .property-details p {
+      margin-bottom: 12px;
+      display: flex;
+    }
+
+    .property-details strong {
+      min-width: 150px;
+      color: #ccc;
+    }
+
+    .property-details span {
+      color: #fff;
+    }
+
+    /* Transaction Fee Section */
+    .transaction-fee {
+      background: #1a1a1a;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* Transfer History Table */
+    .transfer-history {
+      background: #1a1a1a;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .transfer-history table {
+      width: 100%;
+      color: #fff;
+      border-collapse: collapse;
+    }
+
+    .transfer-history th,
+    .transfer-history td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #333;
+    }
+
+    .transfer-history th {
+      background: #333;
+      color: #ff7e5f;
+    }
+
+    /* Help Section */
+    .help-section {
+      background: #1a1a1a;
+      border-radius: 15px;
+      padding: 25px;
+      border: 1px solid #2a2a2a;
+    }
+
+    .help-section h5 {
+      color: #ff7e5f;
+      font-size: 22px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 10px;
+    }
+
+    .help-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .help-section ul li {
+      margin-bottom: 15px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .help-section ul li:before {
+      content: "•";
+      color: #ff7e5f;
+      position: absolute;
+      left: 0;
+      font-size: 20px;
+    }
+
+    .help-section ul li a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+      display: block;
+      padding: 5px 0;
+    }
+
+    .help-section ul li a:hover {
+      color: #ff7e5f;
+    }
+
+    /* Notification Styling */
+    .notification {
+      display: none;
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      color: white;
+      font-weight: 500;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      animation: fadeIn 0.5s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .notification.success {
+      background: #4caf50;
+    }
+
+    .notification.error {
+      background: #f44336;
+    }
+
+    .notification.warning {
+      background: #ff9800;
+    }
+
+    /* Form Elements - Improved Search Box */
+    .search-container {
+      position: relative;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      background: #222;
+      border: 2px solid #333;
+      transition: all 0.3s;
+    }
+
+    .search-container:hover {
+      border-color: #444;
+    }
+
+    .search-container:focus-within {
+      border-color: #ff7e5f;
+      box-shadow: 0 0 0 3px rgba(255, 126, 95, 0.2);
+    }
+
+    .search-container i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ff7e5f;
+      z-index: 1;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px 12px 45px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-control:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    select.form-control {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ff7e5f' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 12px;
+      cursor: pointer;
+    }
+
+    /* Terms and Conditions */
+    .terms-container {
+      margin: 25px 0;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .terms-container input[type="checkbox"] {
+      margin-right: 10px;
+      margin-top: 3px;
+      accent-color: #ff7e5f;
+    }
+
+    .terms-container label {
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .terms-container a {
+      color: yellow;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .terms-container a:hover {
+      color: #ff7e5f;
+    }
+
+    /* Transfer Button */
+    .transfer-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .transfer-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+    }
+
+    .transfer-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      animation: fadeIn 0.3s;
+    }
+
+    .modal-content {
+      background-color: #1a1a1a;
+      margin: 10% auto;
+      padding: 30px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 600px;
+      border: 1px solid #333;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .close-modal:hover {
+      color: #ff7e5f;
+    }
+
+    .modal-content h2 {
+      color: #ff7e5f;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .modal-content ul {
+      padding-left: 20px;
+    }
+
+    .modal-content li {
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .captcha-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .captcha-check-btn {
+        width: 100%;
+        margin-top: 10px;
+      }
+      
+      .modal-content {
+        width: 90%;
+        margin: 20% auto;
+      }
+      
+      .property-details p {
+        flex-direction: column;
+      }
+      
+      .property-details strong {
+        min-width: auto;
+        margin-bottom: 5px;
+      }
+    }
+
+    /* Additional Info Section */
+    .additional-info {
+      background: #1a1a1a;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 20px;
+      border: 1px solid #2a2a2a;
+    }
+
+    .additional-info h5 {
+      color: #ff7e5f;
+      font-size: 22px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 10px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .info-item {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #ff7e5f;
+    }
+
+    .info-item h6 {
+      color: #ff7e5f;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .info-item p {
+      color: #ccc;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* QR Code Section */
+    .qr-section {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .qr-code {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 15px;
+      background: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qr-section p {
+      color: #ccc;
+      font-size: 14px;
+    }
+    
+    /* Improved dropdown styling */
+    .search-container select option {
+      background: #222;
+      color: #fff;
+      padding: 10px;
+    }
+    
+    .search-container select option:hover {
+      background: #ff7e5f;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="index.html" class="logo">
+              <img src="assets/images/logo.png" alt="Propella NFT Logo">
+            </a>
+            <!-- ***** Logo End ***** -->
+            
+            <!-- Navigation Menu -->
+            <ul class="nav">
+              <li><a href="profile.html" class="active">Back to Profile</a></li>
+            </ul>
+            <a class='menu-trigger'>
+              <span>Menu</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Content Start ***** -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+          <!-- ***** Transfer Property Section Start ***** -->
+          <div class="transfer-property">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="heading-section">
+                  <h4><em>Transfer</em> Property Ownership</h4>
+                  <p class="text-muted">Securely transfer your property to another ID</p>
+                </div>
+              </div>
+<br>
+              <!-- Notification Area -->
+              <div class="col-lg-8 offset-lg-2">
+                <div id="notification" class="notification"></div>
+              </div>
+<br>
+              <!-- Transfer Form -->
+              <div class="col-lg-8 offset-lg-2">
+                <form id="transfer-form">
+                  <!-- Select Property - Improved Search Box -->
+                  <div class="search-container">
+                    <i class="fas fa-home"></i>
+                    <select class="form-control" id="property-select" required>
+                      <option value="">-- Choose a Property --</option>
+                      <option value="Nithya Aishwaryam">Nithya Aishwaryam</option>
+                      <option value="Sridar">Sridar</option>
+                      <option value="Sumitra">Sumitra</option>
+                      <option value="Balakrishnan">Balakrishnan</option>
+                      <option value="Sandy Illam">Sandy Illam</option>
+                    </select>
+                  </div>
+
+                  <!-- Recipient Details - Improved Search Box -->
+                  <div class="search-container">
+                    <i class="fas fa-wallet"></i>
+                    <input type="text" class="form-control" id="recipient-wallet" placeholder="Enter Recipient Id" required>
+                    <small class="text-muted" style="display: block; margin-top: 5px; color: #aaa; padding-left: 15px;"></small>
+                  </div>
+
+                  <!-- Custom CAPTCHA -->
+                  <div class="captcha-container">
+                    <div class="captcha-code" id="captchaCode" title="CAPTCHA Code"></div>
+                    <input type="text" class="captcha-input" id="captchaInput" placeholder="Enter CAPTCHA" required>
+                    <button type="button" class="captcha-check-btn" onclick="checkCaptcha()">
+                      <i class="fas fa-check-circle"></i> Verify
+                    </button>
+                  </div>
+
+                  <!-- Terms and Conditions -->
+                  <div class="terms-container">
+                    <input type="checkbox" id="terms-checkbox" required>
+                    <label for="terms-checkbox">
+                      I am consciously transferring the property to the selected user. I accept the
+                      <a onclick="openModal()">Terms and Conditions</a>.
+                    </label>
+                  </div>
+  
+                  <!-- Transfer Button -->
+                  <div class="transfer-button-container">
+                    <button type="submit" class="transfer-btn">
+                      <i class="fas fa-paper-plane"></i> Transfer Property
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- QR Code for Wallet Address -->
+              <div class="col-lg-8 offset-lg-2 qr-section">
+                <div class="qr-code" id="qrCode">
+                  <!-- QR code will be generated here -->
+                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://propella-nft.com" alt="QR Code">
+                </div>
+                <p>Scan to get your address</p>
+              </div>
+
+              <!-- Property Details -->
+              <div class="col-lg-8 offset-lg-2">
+                <div class="property-details">
+                  <h5><i class="fas fa-info-circle"></i> Selected Property Details</h5>
+                  <p><strong>Property Name:</strong> <span id="property-name">-</span></p>
+                  <p><strong>Property Address:</strong> <span id="property-address">-</span></p>
+                  <p><strong>Current Value:</strong> <span id="property-value">-</span></p>
+                  <p><strong>Ownership History:</strong> <span id="property-history">-</span></p>
+                  <p><strong>Token ID:</strong> <span id="property-token">-</span></p>
+                  <p><strong>Blockchain:</strong> <span id="property-blockchain">-</span></p>
+                </div>
+              </div>
+
+              <!-- Additional Information -->
+              <div class="col-lg-8 offset-lg-2">
+                <div class="additional-info">
+                  <h5><i class="fas fa-lightbulb"></i> Important Information</h5>
+                  <div class="info-grid">
+                    <div class="info-item">
+                      <h6><i class="fas fa-shield-alt"></i> Security</h6>
+                      <p>Double-check the recipient address before transferring</p>
+                    </div>
+                    <div class="info-item">
+                      <h6><i class="fas fa-clock"></i> Processing Time</h6>
+                      <p>Transfers typically complete within 5-15 minutes</p>
+                    </div>
+                    <div class="info-item">
+                      <h6><i class="fas fa-gas-pump"></i> Web Fees</h6>
+                      <p>Network fees apply and vary based on congestion</p>
+                    </div>
+                    <div class="info-item">
+                      <h6><i class="fas fa-history"></i> Irreversible</h6>
+                      <p>Transactions cannot be undone once confirmed</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Main Content End ***** -->
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2025 <a href="#" style="color: #ff7e5f;">Propella NFT</a> Company. All rights reserved.</p>
+          <div class="footer-links">
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Terms and Conditions Modal -->
+  <div id="termsModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <h2><i class="fas fa-file-contract"></i> Terms and Conditions</h2>
+      <p>
+        By transferring the property, you agree to the following terms:
+      </p>
+      <ul>
+        <li><i class="fas fa-check"></i> You are transferring ownership of the selected property to the specified recipient.</li>
+        <li><i class="fas fa-check"></i> This action is irreversible once confirmed on the blockchain.</li>
+        <li><i class="fas fa-check"></i> You are solely responsible for ensuring the accuracy of the recipient's wallet address.</li>
+        <li><i class="fas fa-check"></i> Any errors in the transfer process are your responsibility.</li>
+        <li><i class="fas fa-check"></i> Network (gas) fees will apply for the transaction.</li>
+        <li><i class="fas fa-check"></i> By proceeding, you confirm that you have read and understood these terms.</li>
+      </ul>
+      <div class="text-center" style="margin-top: 20px;">
+        <button onclick="closeModal()" style="padding: 10px 20px; background: #ff7e5f; border: none; border-radius: 5px; color: white; cursor: pointer;">I Understand</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scripts -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+  <!-- QR Code Generator -->
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+  <!-- Custom Script -->
+  <script>
+    // Generate a random CAPTCHA code
+    function generateCaptcha() {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let captcha = "";
+      for (let i = 0; i < 6; i++) {
+        captcha += chars[Math.floor(Math.random() * chars.length)];
+      }
+      return captcha;
+    }
+
+    // Display CAPTCHA
+    const captchaCode = document.getElementById('captchaCode');
+    let currentCaptcha = generateCaptcha();
+    captchaCode.textContent = currentCaptcha;
+
+    // Check CAPTCHA
+    function checkCaptcha() {
+      const userInput = document.getElementById('captchaInput').value;
+      if (userInput === currentCaptcha) {
+        showNotification('CAPTCHA verification successful!', 'success');
+        document.getElementById('captchaInput').style.borderColor = '#4caf50';
+      } else {
+        showNotification('CAPTCHA is incorrect. Please try again.', 'error');
+        currentCaptcha = generateCaptcha();
+        captchaCode.textContent = currentCaptcha;
+        document.getElementById('captchaInput').style.borderColor = '#f44336';
+      }
+    }
+
+    // Form Submission with CAPTCHA Validation
+    document.getElementById('transfer-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      // Validate terms checkbox
+      if (!document.getElementById('terms-checkbox').checked) {
+        showNotification('You must accept the terms and conditions to proceed.', 'error');
+        return;
+      }
+
+      // Validate CAPTCHA
+      const userInput = document.getElementById('captchaInput').value;
+      if (userInput !== currentCaptcha) {
+        showNotification('Please complete the CAPTCHA verification.', 'error');
+        return;
+      }
+
+      // Get form data
+      const property = document.getElementById('property-select').value;
+      const recipientWallet = document.getElementById('recipient-wallet').value;
+
+      // Validate inputs
+      if (!property || !recipientWallet) {
+        showNotification('Please fill in all required fields.', 'error');
+        return;
+      }
+
+      // Validate wallet address format (basic check)
+      if (!recipientWallet.match(/^0x[a-fA-F0-9]{12}$/)) {
+        showNotification('Please enter your Id', 'error');
+        return;
+      }
+
+      // Show processing notification
+      showNotification(`Processing transfer of "${property}" to wallet: ${recipientWallet}...`, 'warning');
+      
+      // Simulate blockchain processing delay
+      setTimeout(() => {
+        // Simulate successful transfer
+        showNotification(`Success! "${property}" has been transferred to ${recipientWallet}. Transaction ID: 0x${Math.random().toString(16).substr(2, 64)}`, 'success');
+        
+        // Reset form
+        document.getElementById('transfer-form').reset();
+        currentCaptcha = generateCaptcha();
+        captchaCode.textContent = currentCaptcha;
+        
+        // Update property details to show empty
+        document.getElementById('property-name').textContent = '-';
+        document.getElementById('property-address').textContent = '-';
+        document.getElementById('property-value').textContent = '-';
+        document.getElementById('property-history').textContent = '-';
+        document.getElementById('property-token').textContent = '-';
+        document.getElementById('property-blockchain').textContent = '-';
+      }, 3000);
+    });
+
+    // Show notification
+    function showNotification(message, type) {
+      const notification = document.getElementById('notification');
+      notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i> ${message}`;
+      notification.className = `notification ${type}`;
+      notification.style.display = 'block';
+
+      // Hide notification after 5 seconds
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 5000);
+    }
+
+    // Modal functions
+    function openModal() {
+      document.getElementById('termsModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('termsModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('termsModal');
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Update property details when selected
+    const propertyDetails = {
+      'Nithya Aishwaryam': { 
+        address: '123 Main St, Chennai, Tamil Nadu 600001', 
+        value: '₹1.2 Crore (1200 PROP Tokens)', 
+        history: 'Owner 1 (2020-2022), Owner 2 (2022-Present)',
+        token: 'PROP-1001',
+        blockchain: 'Ethereum (ERC-721)'
+      },
+      'Sridar': { 
+        address: '456 Elm St, Chennai, Tamil Nadu 600042', 
+        value: '₹1.5 Crore (1500 PROP Tokens)', 
+        history: 'Owner 3 (2019-2021), Owner 4 (2021-Present)',
+        token: 'PROP-1002',
+        blockchain: 'Ethereum (ERC-721)'
+      },
+      'Sumitra': { 
+        address: '789 Oak St, Chennai, Tamil Nadu 600078', 
+        value: '₹1.8 Crore (1800 PROP Tokens)', 
+        history: 'Owner 5 (2018-2020), Owner 6 (2020-Present)',
+        token: 'PROP-1003',
+        blockchain: 'Ethereum (ERC-721)'
+      },
+      'Balakrishnan': { 
+        address: '101 Pine St, Chennai, Tamil Nadu 600075', 
+        value: '₹1.6 Crore (1600 PROP Tokens)', 
+        history: 'Owner 7 (2021-2023), Owner 8 (2023-Present)',
+        token: 'PROP-1004',
+        blockchain: 'Ethereum (ERC-721)'
+      },
+      'Sandy Illam': { 
+        address: '202 Maple St, Chennai, Tamil Nadu 600096', 
+        value: '₹2.0 Crore (2000 PROP Tokens)', 
+        history: 'Owner 9 (2020-2022), Owner 10 (2022-Present)',
+        token: 'PROP-1005',
+        blockchain: 'Ethereum (ERC-721)'
+      },
+    };
+
+    document.getElementById('property-select').addEventListener('change', function() {
+      const propertyName = this.value;
+      const details = propertyDetails[propertyName] || { 
+        address: '-', 
+        value: '-', 
+        history: '-',
+        token: '-',
+        blockchain: '-'
+      };
+      
+      document.getElementById('property-name').textContent = propertyName || '-';
+      document.getElementById('property-address').textContent = details.address;
+      document.getElementById('property-value').textContent = details.value;
+      document.getElementById('property-history').textContent = details.history;
+      document.getElementById('property-token').textContent = details.token;
+      document.getElementById('property-blockchain').textContent = details.blockchain;
+      
+      // Update QR code with property-specific data
+      if (propertyName) {
+        const qrData = `Propella NFT Transfer: ${propertyName}\nToken: ${details.token}\nValue: ${details.value}`;
+        document.getElementById('qrCode').innerHTML = '';
+        new QRCode(document.getElementById('qrCode'), {
+          text: qrData,
+          width: 150,
+          height: 150,
+          colorDark : "#000000",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.H
+        });
+      }
+    });
+
+    // Initialize QR code with default data
+    document.addEventListener('DOMContentLoaded', function() {
+      new QRCode(document.getElementById('qrCode'), {
+        text: "Propella NFT Official Wallet: 0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7",
+        width: 150,
+        height: 150,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+      });
+      
+      // Improved select dropdown styling
+      const select = document.getElementById('property-select');
+      select.addEventListener('focus', () => {
+        select.parentElement.style.borderColor = '#ff7e5f';
+        select.parentElement.style.boxShadow = '0 0 0 3px rgba(255, 126, 95, 0.2)';
+      });
+      
+      select.addEventListener('blur', () => {
+        select.parentElement.style.borderColor = '#333';
+        select.parentElement.style.boxShadow = 'none';
+      });
+    });
+  </script>
+
+</body>
+
+</html>

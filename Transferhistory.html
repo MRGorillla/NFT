@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Transaction History - NFT SHIT</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <style>
+    :root {
+      --primary-color: #ff7e5f;
+      --secondary-color: #2a2a2a;
+      --dark-bg: #1a1a1a;
+      --light-text: #ffffff;
+      --success-color: #4caf50;
+      --warning-color: #ff9800;
+      --danger-color: #f44336;
+      --info-color: #2196f3;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--light-text);
+    }
+
+    /* Search and Filters Container */
+    .filters-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 25px;
+      align-items: center;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .filter-group label {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .filters-container select,
+    .filters-container input {
+      padding: 10px 15px;
+      border: 2px solid #444;
+      border-radius: 8px;
+      background: #222;
+      color: #fff;
+      min-width: 180px;
+      transition: all 0.3s ease;
+    }
+
+    .filters-container select:focus,
+    .filters-container input:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(255, 126, 95, 0.2);
+    }
+
+    .search-box {
+      position: relative;
+      flex-grow: 1;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+    }
+
+    .search-box input {
+      padding-left: 40px;
+      width: 100%;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .btn-export {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-export:hover {
+      background: #ff6a4a;
+      transform: translateY(-2px);
+    }
+
+    /* Transaction Table */
+    .transaction-table-container {
+      background: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .transaction-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0;
+    }
+
+    .transaction-table th,
+    .transaction-table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #333;
+    }
+
+    .transaction-table th {
+      background: #2a2a2a;
+      color: var(--primary-color);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+
+    .transaction-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .transaction-table tr:hover {
+      background: #2a2a2a;
+    }
+
+    .transaction-table td {
+      vertical-align: middle;
+    }
+
+    /* Status badges */
+    .status-badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+
+    .status-completed {
+      background-color: rgba(76, 175, 80, 0.2);
+      color: var(--success-color);
+    }
+
+    .status-pending {
+      background-color: rgba(255, 152, 0, 0.2);
+      color: var(--warning-color);
+    }
+
+    .status-failed {
+      background-color: rgba(244, 67, 54, 0.2);
+      color: var(--danger-color);
+    }
+
+    .status-processing {
+      background-color: rgba(33, 150, 243, 0.2);
+      color: var(--info-color);
+    }
+
+    /* Action buttons */
+    .btn-action {
+      padding: 8px 15px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-view {
+      background: rgba(255, 126, 95, 0.1);
+      color: var(--primary-color);
+      border: 1px solid rgba(255, 126, 95, 0.3);
+    }
+
+    .btn-view:hover {
+      background: rgba(255, 126, 95, 0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 30px;
+      padding: 20px 0;
+    }
+
+    .pagination button {
+      padding: 10px 16px;
+      background: #333;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pagination button:hover:not(.active) {
+      background: #444;
+    }
+
+    .pagination button.active {
+      background: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .pagination button.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 50px 20px;
+      color: #777;
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #444;
+    }
+
+    .empty-state h4 {
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .filters-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .search-box {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .transaction-table {
+        display: block;
+        overflow-x: auto;
+      }
+      
+      .pagination {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .transaction-table tbody tr {
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    .transaction-table tbody tr:nth-child(1) { animation-delay: 0.1s; }
+    .transaction-table tbody tr:nth-child(2) { animation-delay: 0.2s; }
+    .transaction-table tbody tr:nth-child(3) { animation-delay: 0.3s; }
+    /* Add more as needed */
+  </style>
+</head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="index.html" class="logo">
+              <img src="assets/images/logo.png" alt="NFT SHIT Logo">
+            </a>
+            <!-- ***** Logo End ***** -->
+
+            
+            <a class='menu-trigger'>
+              <span>Menu</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Content Start ***** -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+          <!-- ***** Transaction History Section Start ***** -->
+          <div class="transaction-history">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="heading-section">
+                  <h4><em>Transaction</em> History</h4>
+                  <p class="text-muted">View and manage your transaction history</p>
+                </div>
+              </div>
+
+              
+
+              <!-- Search and Filters -->
+              <div class="col-lg-12">
+                <div class="filters-container">
+                  <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Search by Transaction ID, Amount...">
+                  </div>
+                  
+                  <div class="filter-group">
+                    <label for="status-filter">Status</label>
+                    <select id="status-filter">
+                      <option value="">All Statuses</option>
+                      <option value="completed">Completed</option>
+                      <option value="pending">Pending</option>
+                      <option value="failed">Failed</option>
+                      <option value="processing">Processing</option>
+                    </select>
+                  </div>
+                  
+                  <div class="filter-group">
+                    <label for="type-filter">Type</label>
+                    <select id="type-filter">
+                      <option value="">All Types</option>
+                      <option value="transfer">Transfer</option>
+                      <option value="purchase">Purchase</option>
+                      <option value="sale">Sale</option>
+                      <option value="refund">Refund</option>
+                      <option value="withdrawal">Withdrawal</option>
+                    </select>
+                  </div>
+                  
+                  <div class="filter-group">
+                    <label for="start-date">From</label>
+                    <input type="date" id="start-date">
+                  </div>
+                  
+                  <div class="filter-group">
+                    <label for="end-date">To</label>
+                    <input type="date" id="end-date">
+                  </div>
+                  
+                  <button id="reset-filters" class="btn-export" style="background: #444;">
+                    <i class="fas fa-sync-alt"></i> Reset
+                  </button>
+                </div>
+              </div>
+
+              <!-- Transaction Table -->
+              <div class="col-lg-12">
+                <div class="transaction-table-container">
+                  <table class="transaction-table">
+                    <thead>
+                      <tr>
+                        <th>Transaction ID</th>
+                        <th>Date & Time</th>
+                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>TX12345678</td>
+                        <td>2023-10-01 14:30:22</td>
+                        <td>10.5 ETH</td>
+                        <td>Purchase</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                        <td>
+                          <button class="btn-action btn-view">
+                            <i class="fas fa-eye"></i> View
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>TX78901234</td>
+                        <td>2023-09-28 09:15:47</td>
+                        <td>5.25 ETH</td>
+                        <td>Sale</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td>
+                          <button class="btn-action btn-view">
+                            <i class="fas fa-eye"></i> View
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>TX34567890</td>
+                        <td>2023-09-25 16:45:12</td>
+                        <td>2.0 ETH</td>
+                        <td>Transfer</td>
+                        <td><span class="status-badge status-failed">Failed</span></td>
+                        <td>
+                          <button class="btn-action btn-view">
+                            <i class="fas fa-eye"></i> View
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>TX90123456</td>
+                        <td>2023-09-20 11:20:33</td>
+                        <td>7.8 ETH</td>
+                        <td>Withdrawal</td>
+                        <td><span class="status-badge status-processing">Processing</span></td>
+                        <td>
+                          <button class="btn-action btn-view">
+                            <i class="fas fa-eye"></i> View
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>TX56789012</td>
+                        <td>2023-09-15 19:05:18</td>
+                        <td>3.5 ETH</td>
+                        <td>Refund</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                        <td>
+                          <button class="btn-action btn-view">
+                            <i class="fas fa-eye"></i> View
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <!-- Empty State (hidden by default) -->
+                <div class="empty-state" style="display: none;">
+                  <i class="fas fa-exchange-alt"></i>
+                  <h4>No transactions found</h4>
+                  <p>Try adjusting your search or filter criteria</p>
+                </div>
+              </div>
+
+              <!-- Pagination -->
+              <div class="col-lg-12">
+                <div class="pagination">
+                  <button class="disabled">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <button class="active">1</button>
+                  <button>2</button>
+                  <button>3</button>
+                  <button>4</button>
+                  <button>5</button>
+                  <button>
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ***** Transaction History Section End ***** -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Main Content End ***** -->
+
+  <!-- ***** Footer Start ***** -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2025 <a href="#">Propella</a> Company. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- ***** Footer End ***** -->
+
+  <!-- Scripts -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+  <!-- Transaction History Script -->
+  <script>
+    $(document).ready(function() {
+      // Set default dates (last 30 days)
+      const today = new Date();
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(today.getDate() - 30);
+      
+      document.getElementById('start-date').valueAsDate = thirtyDaysAgo;
+      document.getElementById('end-date').valueAsDate = today;
+      
+      // Filter Transactions
+      function filterTransactions() {
+        const searchQuery = document.getElementById('search-input').value.toLowerCase();
+        const statusFilter = document.getElementById('status-filter').value;
+        const typeFilter = document.getElementById('type-filter').value;
+        const startDate = document.getElementById('start-date').value;
+        const endDate = document.getElementById('end-date').value;
+        
+        const rows = document.querySelectorAll('.transaction-table tbody tr');
+        let visibleRows = 0;
+        
+        rows.forEach(row => {
+          const id = row.cells[0].textContent.toLowerCase();
+          const date = row.cells[1].textContent.split(' ')[0]; // Get just the date part
+          const amount = row.cells[2].textContent.toLowerCase();
+          const type = row.cells[3].textContent.toLowerCase();
+          const status = row.cells[4].textContent.toLowerCase();
+          
+          const matchesSearch = id.includes(searchQuery) || amount.includes(searchQuery);
+          const matchesStatus = statusFilter ? status.includes(statusFilter) : true;
+          const matchesType = typeFilter ? type === typeFilter : true;
+          const matchesDate = (!startDate || date >= startDate) && (!endDate || date <= endDate);
+          
+          if (matchesSearch && matchesStatus && matchesType && matchesDate) {
+            row.style.display = '';
+            visibleRows++;
+          } else {
+            row.style.display = 'none';
+          }
+        });
+        
+        // Show empty state if no rows visible
+        const emptyState = document.querySelector('.empty-state');
+        const tableContainer = document.querySelector('.transaction-table-container');
+        if (visibleRows === 0) {
+          emptyState.style.display = 'block';
+          tableContainer.style.display = 'none';
+        } else {
+          emptyState.style.display = 'none';
+          tableContainer.style.display = 'block';
+        }
+      }
+      
+      // Event listeners
+      document.getElementById('search-input').addEventListener('input', filterTransactions);
+      document.getElementById('status-filter').addEventListener('change', filterTransactions);
+      document.getElementById('type-filter').addEventListener('change', filterTransactions);
+      document.getElementById('start-date').addEventListener('change', filterTransactions);
+      document.getElementById('end-date').addEventListener('change', filterTransactions);
+      document.getElementById('reset-filters').addEventListener('click', function() {
+        document.getElementById('search-input').value = '';
+        document.getElementById('status-filter').value = '';
+        document.getElementById('type-filter').value = '';
+        document.getElementById('start-date').valueAsDate = thirtyDaysAgo;
+        document.getElementById('end-date').valueAsDate = today;
+        filterTransactions();
+      });
+      
+      // Export functionality
+      document.querySelector('.btn-export').addEventListener('click', function() {
+        alert('Export functionality would be implemented here');
+        // In a real implementation, this would generate a CSV file
+      });
+      
+      // Print functionality
+      document.querySelectorAll('.btn-export')[1].addEventListener('click', function() {
+        window.print();
+      });
+      
+      // Pagination
+      document.querySelectorAll('.pagination button:not(.disabled)').forEach(button => {
+        button.addEventListener('click', function() {
+          if (!this.classList.contains('active')) {
+            document.querySelector('.pagination button.active').classList.remove('active');
+            this.classList.add('active');
+            // In a real implementation, this would load the new page of results
+            alert('Pagination would load page ' + this.textContent);
+          }
+        });
+      });
+      
+      // View transaction details
+      document.querySelectorAll('.btn-view').forEach(button => {
+        button.addEventListener('click', function() {
+          const transactionId = this.closest('tr').cells[0].textContent;
+          alert('Viewing details for transaction: ' + transactionId);
+          // In a real implementation, this would open a modal or navigate to a details page
+        });
+      });
+    });
+  </script>
+</body>
+</html>

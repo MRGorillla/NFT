@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Marketplace - Local Properties</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+
+  <!-- Map Integration (Leaflet.js) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Custom CSS -->
+  <style>
+    /* General Styles */
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Marketplace Container */
+    .marketplace-container {
+      padding: 20px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(to right, #1a1a1a, #333);
+      border-radius: 15px;
+      padding: 50px;
+      text-align: center;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section h1 {
+      color: #ff7e5f;
+      font-size: 48px;
+      margin-bottom: 20px;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    .hero-section p {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    .hero-section input {
+      width: 60%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-right: 10px;
+      animation: fadeInLeft 1s ease-in-out;
+    }
+
+    .hero-section button {
+      padding: 10px 20px;
+      background: #ff7e5f;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      animation: fadeInRight 1s ease-in-out;
+    }
+
+    .hero-section button:hover {
+      background: #feb47b;
+    }
+
+    /* Map Section */
+    #map {
+      height: 400px;
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 20px;
+    }
+
+    /* Filter and Sort Section */
+    .filter-sort-section {
+      margin-bottom: 20px;
+    }
+
+    .filter-sort-section select,
+    .filter-sort-section input {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-right: 10px;
+    }
+
+    /* Property Listings */
+    .listings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .listing-card {
+      background: #333;
+      border-radius: 10px;
+      padding: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .listing-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .listing-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .listing-card h5 {
+      color: #ff7e5f;
+    }
+
+    .listing-card p {
+      color: #fff;
+      margin: 5px 0;
+    }
+
+    .listing-card .price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .listing-card .buy-button {
+      background: #ff7e5f;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%;
+    }
+
+    .listing-card .buy-button:hover {
+      background: #feb47b;
+    }
+
+    /* Property Details Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+      background: #333;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 600px;
+      position: relative;
+    }
+
+    .close {
+      color: #fff;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #ff7e5f;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="index.html" class="logo">
+              <img src="assets/images/logo.png" alt="Local Properties Logo">
+            </a>
+            <!-- ***** Logo End ***** -->
+
+            <!-- ***** Menu Start ***** -->
+            <ul class="nav">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="browse.html">Browse</a></li>
+              <li><a href="details.html">Details</a></li>
+              <li><a href="streams.html">Streams</a></li>
+              <li><a href="profile.html">Profile <img src="assets/images/profile-header.jpg" alt="Profile"></a></li>
+            </ul>
+            <a class='menu-trigger'>
+              <span>Menu</span>
+            </a>
+            <!-- ***** Menu End ***** -->
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Content Start ***** -->
+  <div class="container marketplace-container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+          <!-- ***** Hero Section ***** -->
+          <div class="hero-section">
+            <h1>Find Properties in Your Area</h1>
+            <p>Explore properties for rent or sale in your neighborhood.</p>
+            <input type="text" id="searchInput" placeholder="Search properties, NFTs, or users...">
+            <button onclick="searchProperties()">Search</button>
+          </div>
+
+          <!-- ***** Map Section ***** -->
+          <div id="map"></div>
+
+          <!-- ***** Filter and Sort Section ***** -->
+          <div class="filter-sort-section">
+            <select id="filterType">
+              <option value="all">All Types</option>
+              <option value="residential">Residential</option>
+              <option value="commercial">Commercial</option>
+              <option value="land">Land</option>
+            </select>
+            <input type="number" id="filterPrice" placeholder="Max Price">
+            <button onclick="applyFilters()">Apply Filters</button>
+          </div>
+
+          <!-- ***** Property Listings ***** -->
+          <div class="featured-listings">
+            <h2>Featured Listings</h2>
+            <div class="listings-grid" id="listingsGrid">
+              <!-- Listings will be dynamically populated here -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Main Content End ***** -->
+
+  <!-- ***** Property Details Modal ***** -->
+  <div id="propertyModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <img id="modalImage" src="" alt="Property Image" style="width:100%; border-radius:10px;">
+      <p id="modalLocation"></p>
+      <p id="modalType"></p>
+      <p id="modalPrice"></p>
+      <button class="buy-button" onclick="buyProperty()">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- ***** Footer Start ***** -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2025 <a href="#">Local Properties</a> Company. All rights reserved.
+            <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- ***** Footer End ***** -->
+
+  <!-- Scripts -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+  <!-- Custom Scripts -->
+  <script>
+    // Sample Data
+    const properties = [
+      { id: 1, title: "Nithya Aishwaryam", location: "Ramapuram, Chennai", type: "Residential", price: "10 ETH", image: "assets/images/property1.jpg" },
+      { id: 2, title: "Sridar Illam", location: "Ramapuram, Chennai", type: "Commercial", price: "15 ETH", image: "assets/images/property2.jpg" },
+      // Add more properties here
+    ];
+
+    // Initialize Map
+    const map = L.map('map').setView([13.0827, 80.2707], 13); // Chennai coordinates
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+    }).addTo(map);
+
+    // Add markers for properties
+    properties.forEach(property => {
+      L.marker([13.0827, 80.2707]).addTo(map) // Replace with actual coordinates
+        .bindPopup(`<b>${property.title}</b><br>${property.location}`);
+    });
+
+    // Populate Listings
+    const listingsGrid = document.getElementById('listingsGrid');
+    properties.forEach(property => {
+      const listingCard = `
+        <div class="listing-card" onclick="openModal(${property.id})">
+          <img src="${property.image}" alt="${property.title}">
+          <h5>${property.title}</h5>
+          <p><strong>Location:</strong> ${property.location}</p>
+          <p><strong>Type:</strong> ${property.type}</p>
+          <p class="price">${property.price}</p>
+          <button class="buy-button">Buy Now</button>
+        </div>
+      `;
+      listingsGrid.innerHTML += listingCard;
+    });
+
+    // Open Modal
+    function openModal(id) {
+      const property = properties.find(p => p.id === id);
+      document.getElementById('modalTitle').innerText = property.title;
+      document.getElementById('modalImage').src = property.image;
+      document.getElementById('modalLocation').innerText = `Location: ${property.location}`;
+      document.getElementById('modalType').innerText = `Type: ${property.type}`;
+      document.getElementById('modalPrice').innerText = `Price: ${property.price}`;
+      document.getElementById('propertyModal').style.display = 'block';
+    }
+
+    // Close Modal
+    function closeModal() {
+      document.getElementById('propertyModal').style.display = 'none';
+    }
+
+    // Buy Property
+    function buyProperty() {
+      alert('Property purchased successfully!');
+      closeModal();
+    }
+
+    // Search Properties
+    function searchProperties() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const filteredProperties = properties.filter(property =>
+        property.title.toLowerCase().includes(query) ||
+        property.location.toLowerCase().includes(query)
+      );
+      listingsGrid.innerHTML = '';
+      filteredProperties.forEach(property => {
+        const listingCard = `
+          <div class="listing-card" onclick="openModal(${property.id})">
+            <img src="${property.image}" alt="${property.title}">
+            <h5>${property.title}</h5>
+            <p><strong>Location:</strong> ${property.location}</p>
+            <p><strong>Type:</strong> ${property.type}</p>
+            <p class="price">${property.price}</p>
+            <button class="buy-button">Buy Now</button>
+          </div>
+        `;
+        listingsGrid.innerHTML += listingCard;
+      });
+    }
+
+    // Apply Filters
+    function applyFilters() {
+      const type = document.getElementById('filterType').value;
+      const price = parseFloat(document.getElementById('filterPrice').value);
+      const filteredProperties = properties.filter(property =>
+        (type === 'all' || property.type.toLowerCase() === type) &&
+        (!price || parseFloat(property.price) <= price)
+      );
+      listingsGrid.innerHTML = '';
+      filteredProperties.forEach(property => {
+        const listingCard = `
+          <div class="listing-card" onclick="openModal(${property.id})">
+            <img src="${property.image}" alt="${property.title}">
+            <h5>${property.title}</h5>
+            <p><strong>Location:</strong> ${property.location}</p>
+            <p><strong>Type:</strong> ${property.type}</p>
+            <p class="price">${property.price}</p>
+            <button class="buy-button">Buy Now</button>
+          </div>
+        `;
+        listingsGrid.innerHTML += listingCard;
+      });
+    }
+  </script>
+</body>
+
+</html>

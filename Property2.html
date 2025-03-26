@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="NFT SHIT - Sumitra Property Details and Location">
+    <meta name="author" content="NFT SHIT Team">
+    <meta name="keywords" content="real estate, property, NFT, Chennai, investment, Sumitra, Meenambakkam">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>NFT SHIT | Sumitra - Property Details</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    
+    <!-- Custom CSS -->
+    <style>
+        .main-profile {
+            background: #1f2122;
+            border-radius: 23px;
+            padding: 30px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            border: 1px solid #27292a;
+        }
+        
+        .property-details li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #27292a;
+            font-weight: 500;
+            color: #ec6090;
+        }
+        
+        .property-details li span {
+            color: white;
+            font-weight: 400;
+        }
+        
+        .main-info h4 {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .main-info p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .main-info span {
+            display: inline-block;
+            background-color: #ec6090;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        #map {
+            height: 500px;
+            border-radius: 23px;
+            margin: 30px 0;
+            border: 1px solid #27292a;
+        }
+        
+        .gallery-thumbnail {
+            border-radius: 23px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 1px solid #27292a;
+        }
+        
+        .gallery-thumbnail:hover {
+            transform: translateY(-5px);
+        }
+        
+        .amenities-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .amenity-item {
+            background: #27292a;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: white;
+        }
+        
+        .amenity-item i {
+            margin-right: 8px;
+            color: #ec6090;
+        }
+        
+        .contact-card {
+            background: #1f2122;
+            border-radius: 23px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid #27292a;
+        }
+        
+        .contact-card h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .contact-info i {
+            width: 40px;
+            height: 40px;
+            background-color: #ec6090;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .btn-primary {
+            background-color: #ec6090;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background-color: #e44c7b;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50px;
+            height: 3px;
+            background-color: #ec6090;
+        }
+        
+        .property-description {
+            line-height: 1.8;
+            color: #afafaf;
+        }
+        
+        .table {
+            color: white;
+            background-color: #1f2122;
+            border-color: #27292a;
+        }
+        
+        .table thead th {
+            border-color: #27292a;
+            background-color: #27292a;
+        }
+        
+        .table td, .table th {
+            border-color: #27292a;
+        }
+        
+        .alert-info {
+            background-color: #27292a;
+            border-color: #27292a;
+            color: white;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-profile {
+                padding: 20px;
+            }
+            
+            .main-info h4 {
+                font-size: 24px;
+            }
+            
+            #map {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">
+                            <img src="assets/images/logo.png" alt="NFT SHIT Logo">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        
+                        <!-- ***** Menu Start ***** -->
+                        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-content">
+
+                    <!-- Property Details Section -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="main-profile">
+                                <!-- Property Header -->
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <img src="assets/images/images.png" alt="Sumitra Property" class="img-fluid rounded" style="border: 1px solid #27292a;"><br><br>
+                                        <img src="assets/images/property-2.jpg" alt="Sumitra Property Interior" class="img-fluid rounded" style="border: 1px solid #27292a;">
+                                    </div>
+                                    <div class="col-lg-4 align-self-center">
+                                        <div class="main-info header-text">
+                                            <span>NFT Property #2002</span>
+                                            <h4>Sumitra</h4>
+                                            <p><i class="fas fa-map-marker-alt"></i> Meenambakkam, Chennai</p>
+                                            <div class="rating">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="far fa-star text-warning"></i>
+                                                <span class="ml-2">4.0 (18 reviews)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 align-self-center">
+                                        <ul class="property-details">
+                                            <li>Coordinates <span>12.9875° N, 80.1753° E</span></li>
+                                            <li>Floor <span>Ground Floor</span></li>
+                                            <li>Area <span>1700 sq.ft</span></li>
+                                            <li>Configuration <span>2 BHK</span></li>
+                                            <li>Price <span>₹1.5 Crore</span></li>
+                                            <li>Property Type <span>Individual House</span></li>
+                                            <li>Soil Type <span>Clay, Shale, and Sandstone</span></li>
+                                            <li>Tokenized Value <span>1500 SHIT Tokens</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Property Gallery -->
+                                <div class="row property-gallery">
+                                    <div class="col-lg-12">
+                                        <h3 class="section-title">Property Gallery</h3>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <div class="gallery-thumbnail">
+                                            <img src="assets/images/property-1.jpg" alt="Living Area" class="img-fluid rounded">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <div class="gallery-thumbnail">
+                                            <img src="assets/images/property-2.jpg" alt="Bedroom" class="img-fluid rounded">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <div class="gallery-thumbnail">
+                                            <img src="assets/images/property-3.jpg" alt="Kitchen" class="img-fluid rounded">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <div class="gallery-thumbnail">
+                                            <img src="assets/images/property-4.jpg" alt="Garden Area" class="img-fluid rounded">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Property Description -->
+                                <div class="row mt-5">
+                                    <div class="col-lg-12">
+                                        <h3 class="section-title">Property Description</h3>
+                                        <p class="property-description">
+                                            Sumitra is a beautifully maintained 2 BHK individual house located in the prime area of Meenambakkam, Chennai. 
+                                            This ground floor property spans 1700 sq.ft and features a spacious living area, modern kitchen, two well-appointed 
+                                            bedrooms, and a private garden space. The property is built on stable soil composition of clay, shale, and sandstone, 
+                                            ensuring structural integrity. Located just minutes away from the Chennai International Airport and major transportation 
+                                            hubs, this property offers excellent connectivity and investment potential.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Amenities -->
+                                <div class="row mt-5">
+                                    <div class="col-lg-12">
+                                        <h3 class="section-title">Amenities</h3>
+                                        <div class="amenities-list">
+                                            <div class="amenity-item">
+                                                <i class="fas fa-swimming-pool"></i> Community Pool
+                                            </div>
+                                            <div class="amenity-item">
+                                                <i class="fas fa-parking"></i> Private Parking
+                                            </div>
+                                            <div class="amenity-item">
+                                                <i class="fas fa-water"></i> 24/7 Water Supply
+                                            </div>
+                                            <div class="amenity-item">
+                                                <i class="fas fa-shield-alt"></i> Gated Security
+                                            </div>
+                                            <div class="amenity-item">
+                                                <i class="fas fa-tree"></i> Garden Area
+                                            </div>
+                                            <div class="amenity-item">
+                                                <i class="fas fa-bolt"></i> Power Backup
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Property Location Map -->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h3 class="section-title">Property Location</h3>
+                                        <div id="map"></div>
+                                        <p class="mt-3"><i class="fas fa-map-marker-alt" style="color: #ec6090;"></i> <strong>Address:</strong> Sumitra, Meenambakkam, Chennai, Tamil Nadu - 600027, India</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Nearby Facilities -->
+                                <div class="row mt-5">
+                                    <div class="col-lg-12">
+                                        <h3 class="section-title">Nearby Facilities</h3>
+                                        <div class="row">
+                                            <div class="col-md-3 col-6 mb-4">
+                                                <div class="card h-100" style="background: #27292a; border: 1px solid #333;">
+                                                    <div class="card-body text-center">
+                                                        <i class="fas fa-plane mb-3" style="font-size: 2rem; color: #ec6090;"></i>
+                                                        <h6 style="color: white;">Airport</h6>
+                                                        <p class="small" style="color: #afafaf;">Chennai International (2km)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-6 mb-4">
+                                                <div class="card h-100" style="background: #27292a; border: 1px solid #333;">
+                                                    <div class="card-body text-center">
+                                                        <i class="fas fa-train mb-3" style="font-size: 2rem; color: #ec6090;"></i>
+                                                        <h6 style="color: white;">Railway Station</h6>
+                                                        <p class="small" style="color: #afafaf;">Meenambakkam (1.5km)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-6 mb-4">
+                                                <div class="card h-100" style="background: #27292a; border: 1px solid #333;">
+                                                    <div class="card-body text-center">
+                                                        <i class="fas fa-shopping-bag mb-3" style="font-size: 2rem; color: #ec6090;"></i>
+                                                        <h6 style="color: white;">Shopping</h6>
+                                                        <p class="small" style="color: #afafaf;">Phoenix MarketCity (3km)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-6 mb-4">
+                                                <div class="card h-100" style="background: #27292a; border: 1px solid #333;">
+                                                    <div class="card-body text-center">
+                                                        <i class="fas fa-hospital mb-3" style="font-size: 2rem; color: #ec6090;"></i>
+                                                        <h6 style="color: white;">Hospital</h6>
+                                                        <p class="small" style="color: #afafaf;">Apollo (4km)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- NFT Details -->
+                                <div class="row mt-5">
+                                    <div class="col-lg-12">
+                                        <h3 class="section-title">NFT Ownership Details</h3>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead style="background: #27292a;">
+                                                    <tr>
+                                                        <th>Token ID</th>
+                                                        <th>Blockchain</th>
+                                                        <th>Contract Address</th>
+                                                        <th>Token Standard</th>
+                                                        <th>Fractional Ownership</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>#SHIT-2002</td>
+                                                        <td>Ethereum</td>
+                                                        <td class="text-truncate" style="max-width: 150px;">0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e7</td>
+                                                        <td>ERC-721</td>
+                                                        <td>1500 tokens (100%)</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright © 2036 <a href="#" style="color: #ec6090;">NFT SHIT</a> Company. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Additional Scripts -->
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/popup.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+    <!-- Leaflet JS for Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Custom Map Script -->
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([12.9875, 80.1753], 16);
+
+        // Add Google Satellite layer
+        L.tileLayer('http://{s}.google.com/vt?lyrs=s&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+            attribution: 'Map data © Google'
+        }).addTo(map);
+
+        // Custom icon
+        var propertyIcon = L.icon({
+            iconUrl: 'assets/images/marker-icon.png',
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [0, -40]
+        });
+
+        // Add a marker with custom icon
+        var marker = L.marker([12.9875, 80.1753], {icon: propertyIcon}).addTo(map)
+            .bindPopup(`
+                <div style="font-weight:600;font-size:16px;color:#333;">Sumitra</div>
+                <div style="font-size:14px;color:#666;">2 BHK House | 1700 sq.ft</div>
+                <div style="font-size:12px;color:#666;"><i class="fas fa-map-marker-alt"></i> Meenambakkam, Chennai</div>
+                <img src="assets/images/images.png" style="width:100%;border-radius:5px;margin-top:5px;">
+            `)
+            .openPopup();
+
+        // Add circle around property
+        L.circle([12.9875, 80.1753], {
+            color: '#ec6090',
+            fillColor: '#ec6090',
+            fillOpacity: 0.2,
+            radius: 150
+        }).addTo(map);
+
+        // Add nearby points of interest
+        var nearbyPlaces = [
+            {name: "Chennai Airport", coords: [12.9904, 80.1693], type: "airport"},
+            {name: "Meenambakkam Station", coords: [12.9820, 80.1710], type: "train"},
+            {name: "Phoenix MarketCity", coords: [12.9930, 80.1820], type: "mall"},
+            {name: "Apollo Hospital", coords: [12.9800, 80.1900], type: "hospital"}
+        ];
+
+        nearbyPlaces.forEach(function(place) {
+            var icon;
+            if (place.type === "airport") {
+                icon = L.icon({
+                    iconUrl: 'assets/images/airport-icon.png',
+                    iconSize: [30, 30]
+                });
+            } else if (place.type === "train") {
+                icon = L.icon({
+                    iconUrl: 'assets/images/train-icon.png',
+                    iconSize: [30, 30]
+                });
+            } else if (place.type === "mall") {
+                icon = L.icon({
+                    iconUrl: 'assets/images/mall-icon.png',
+                    iconSize: [30, 30]
+                });
+            } else if (place.type === "hospital") {
+                icon = L.icon({
+                    iconUrl: 'assets/images/hospital-icon.png',
+                    iconSize: [30, 30]
+                });
+            }
+            
+            L.marker(place.coords, {icon: icon}).addTo(map)
+                .bindPopup(`<b>${place.name}</b><br>${place.type.charAt(0).toUpperCase() + place.type.slice(1)}`);
+        });
+
+        console.log("Map and property details loaded successfully");
+    </script>
+
+
+
+</body>
+
+</html>
