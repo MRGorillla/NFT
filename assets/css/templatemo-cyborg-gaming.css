@@ -41,10 +41,10 @@ figure, header, nav, section, article, aside, footer, figcaption {
   outline: 0;
 }
 body {
-  background: linear-gradient(270deg, #0a0a0a, #1c1c1c, #2a2a2a, #1c1c1c, #0a0a0a);
-  background-size: 500% 500%;
-  animation: gradientFlow 8s linear infinite;
-  height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e, #0a0a0a);
+  background-size: 400% 400%;
+  animation: gradientFlow 15s ease infinite;
+  min-height: 100vh;
   margin: 0;
 }
 
@@ -95,15 +95,7 @@ header, nav, section, article, aside, footer, hgroup {
   box-sizing: border-box;
 }
 
-html, body {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  background-color: #1e1e1e;
-  font-size: 16px;
-  -ms-text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+
 
 a {
 	color: #CCC;
@@ -376,10 +368,6 @@ Header Style
   border-radius: 50px;
 }
 
-.background-header .main-nav {
-  padding: 0px;
-  background-color: transparent;
-}
 .search-container {
     position: relative;
     display: flex;
@@ -388,39 +376,32 @@ Header Style
     border-radius: 25px;
     padding: 10px 15px;
     margin-bottom: 20px;
-  }
+    border: none; /* Remove any default border */
+}
 
-  .search-container i {
+.search-container i {
     color: #ffffff;
     margin-right: 10px;
-  }
+}
 
-  .search-container select {
+.search-container input {
     width: 100%;
     background-color: transparent;
     border: none;
     color: #ffffff;
     font-size: 16px;
     outline: none;
-    appearance: none; /* Remove default arrow */
-  }
+}
 
-  .search-container select option {
-    background-color: #1e1e1e;
-    color: #ffffff;
-  }
+.search-container input::placeholder {
+    color: #a0a0a0; /* Lighter color for placeholder */
+}
 
-  /* Add a custom arrow for the dropdown */
-  .search-container::after {
-    content: "\f107"; /* FontAwesome down arrow */
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    position: absolute;
-    right: 15px;
-    color: #ffffff;
-    pointer-events: none; /* Ensure clicks go to the select element */
-  }
-
+/* Remove the default focus outline (optional) */
+.search-container input:focus {
+    box-shadow: none;
+    outline: none;
+}
 
   /* Transfer Button */
   .transfer-button-container {
@@ -821,30 +802,27 @@ Banner Style
 */
 
 .main-banner {
-  background-image: url(../images/banner-bg.jpg);
+  background-image: url(../images/box3.jpg);
   background-position: center center;
   background-size: cover;
   min-height: 380px;
   border-radius: 23px;
   padding: 80px 60px;
+  position: relative; /* Added for overlay */
+  z-index: 1; /* Ensure it stays above body gradient */
 }
 
-.main-banner h6 {
-  font-size: 20px;
-  color: #fff;
-  font-weight: 400;
-  margin-bottom: 25px;
-}
-
-.main-banner h4 {
-  font-size: 45px;
-  text-transform: uppercase;
-  margin-bottom: 25px;
-}
-
-.main-banner h4 em {
-  font-style: normal;
-  color: #ec6090;
+/* Optional: Add a dark overlay to make text more readable */
+.main-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  border-radius: 23px;
+  z-index: -1;
 }
 
 /* 
@@ -1518,35 +1496,39 @@ body {
 }
 
 @media (max-width: 992px) {
-  .background-header {
-  display: inline-block;
+  .header-area {
+    background-color: rgba(30, 30, 30, 0.9) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: none !important;
   }
-  .header-area .main-nav #search {
-    display: none;
+  
+  .header-area .main-nav {
+    background: transparent !important;
   }
-  .heading-section h4 {
-    font-size: 20px;
+  
+  .header-area .main-nav .nav {
+    background: rgba(30, 30, 30, 0.95) !important;
+    margin-top: 70px !important;
+    padding: 20px 0;
   }
-  .gaming-library .item ul li {
-    width: 48% !important;
+  
+  .header-area .main-nav .nav li {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
   }
-  .gaming-library .item ul li:last-child {
-    text-align: left;
+  
+  .header-area .main-nav .nav li a {
+    color: #fff !important;
+    background: transparent !important;
   }
-  .featured-games {
-    margin-bottom: 60px;
-  }
-  .start-stream .item {
-    margin: 15px 0px;
-  }
-  .feature-banner .thumb {
-    margin-top: 30px;
-  }
-  .main-profile .main-info {
-    margin: 45px 0px;
+  
+  .menu-trigger span,
+  .menu-trigger span:before,
+  .menu-trigger span:after {
+    background-color: #fff !important;
   }
 }
-
 @media (max-width: 1200px) {
   .header-area .main-nav .nav li {
     padding-right: 5px;

@@ -142,24 +142,13 @@
   </div>
 
   <script>
-    // Hide the container initially to prevent flash
-    document.getElementById('loginContainer').style.display = 'none';
-
-    // Check login status after DOM is fully loaded
+    // Show the login form when page loads
     document.addEventListener('DOMContentLoaded', function() {
-      const loginId = localStorage.getItem('loginId');
-      const authToken = localStorage.getItem('authToken');
+      document.getElementById('loginContainer').style.display = 'block';
       
-      if (loginId && authToken) {
-        // If already logged in, redirect immediately
-        window.location.href = 'index.html';
-      } else {
-        // Show login form if not logged in
-        document.getElementById('loginContainer').style.display = 'block';
-        // Clear any previous partial login data
-        localStorage.removeItem('loginId');
-        localStorage.removeItem('authToken');
-      }
+      // Clear any previous login data (optional)
+      localStorage.removeItem('loginId');
+      localStorage.removeItem('authToken');
     });
 
     function sendOTP() {

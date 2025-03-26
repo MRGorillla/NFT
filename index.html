@@ -51,9 +51,7 @@
                     <!-- ***** Logo End ***** -->
                     
                     <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                        </a> <a href="LoginId.html" class="login-btn">Profile</a>
-                    </ul>
+                    
 <a class='menu-trigger'>
     <span>Menu</span>
 </a> 
@@ -95,12 +93,13 @@
     color: #fff; /* Normal white text */
   }
 
-  /* Gradient effect for username */
+  /* Changed to bright pink gradient for username */
   .gradient-text {
-    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    background: linear-gradient(45deg, #ff00ec, #ff00ec);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 102, 255, 0.3); /* Optional glow effect */
   }
 </style>
 
@@ -130,11 +129,13 @@
     type();
   }
 
-  // User's name with gradient effect
+  // User's name with bright pink gradient effect
   const userName = `<span class="gradient-text">User</span>`; // Replace "User" dynamically
 
   // Full message with the gradient username
-  const message = `Hi, ${userName} Welcome to Propella...`;
+  const message = `Hi, ${userName} Welcome to Propella... >>
+  
+  "Propella: Securing Your Property's Future"`;
 
   const textElement = document.getElementById("typewriter-text");
   typeWriterEffect(textElement, [message], 100); // Typing speed: 100ms
@@ -255,13 +256,36 @@
     <div class="main-button">
         <br><br>
         <center>
-            <a href="browse.html" class="btn-with-logo">
+            <a href="#" id="ai-assistant-btn" class="btn-with-logo">
                 <i class="fa-solid fa-robot button-icon"></i>
                 <h4 class="button-text">AI Legal Assistant</h4>
             </a>
         </center>
     </div>
 </div>
+
+<script>
+    // Add click handler for AI Assistant button
+    document.getElementById('ai-assistant-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        // Initialize Chatling if not already loaded
+        if (!window.Chatling) {
+            const script = document.createElement('script');
+            script.src = 'https://chatling.ai/js/embed.js';
+            script.async = true;
+            script.id = 'chatling-embed-script';
+            script.setAttribute('data-id', '7291819981');
+            document.body.appendChild(script);
+            
+            // Set config
+            window.chtlConfig = { chatbotId: "7291819981" };
+        }
+        // Trigger chat (if Chatling is already loaded)
+        else if (window.Chatling.open) {
+            window.Chatling.open();
+        }
+    });
+</script>
 
 
 
