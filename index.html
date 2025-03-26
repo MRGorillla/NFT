@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>NFT SHIT</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+  </head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        </a> <a href="LoginId.html" class="login-btn">Profile</a>
+                    </ul>
+<a class='menu-trigger'>
+    <span>Menu</span>
+</a> 
+
+					
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+   <!-- ***** Banner Start ***** -->
+<div class="main-banner">
+  <div class="row">
+    <div class="col-lg-7">
+      <div class="header-text">
+        <h1 id="typewriter-text"></h1> <!-- Typing effect here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  /* Style for typewriter text */
+  #typewriter-text {
+    font-size: 48px; /* Bigger text */
+    font-weight: bold;
+    color: #fff; /* Normal white text */
+  }
+
+  /* Gradient effect for username */
+  .gradient-text {
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+  }
+</style>
+
+<script>
+  function typeWriterEffect(element, textParts, speed) {
+    let i = 0;
+    let j = 0;
+    let currentText = "";
+    let typing = true;
+
+    function type() {
+      if (i < textParts.length) {
+        if (typing) {
+          if (j < textParts[i].length) {
+            currentText += textParts[i].charAt(j);
+            j++;
+            setTimeout(type, speed);
+          } else {
+            typing = false;
+            setTimeout(type, speed);
+          }
+        }
+        element.innerHTML = currentText;
+      }
+    }
+
+    type();
+  }
+
+  // User's name with gradient effect
+  const userName = `<span class="gradient-text">User</span>`; // Replace "User" dynamically
+
+  // Full message with the gradient username
+  const message = `Hi, ${userName} Welcome to Propella...`;
+
+  const textElement = document.getElementById("typewriter-text");
+  typeWriterEffect(textElement, [message], 100); // Typing speed: 100ms
+</script>
+<!-- ***** Banner End ***** -->
+<br><br>
+
+<!-- ***** Search Bar Start ***** -->
+<div class="search-container">
+  <i class="fas fa-search"></i>
+  <input type="text" id="search-input" placeholder="Search..." onkeyup="searchItems()">
+</div>
+<!-- ***** Search Bar End ***** -->
+
+<script>
+  function searchItems() {
+    let input = document.getElementById("search-input").value.toLowerCase();
+    let items = document.getElementsByClassName("item-link");
+
+    for (let i = 0; i < items.length; i++) {
+      let itemText = items[i].textContent.toLowerCase();
+      if (itemText.includes(input)) {
+        items[i].style.display = "block"; // Show matching items
+      } else {
+        items[i].style.display = "none"; // Hide non-matching items
+      }
+    }
+  }
+</script>
+
+          <!-- ***** Most Popular Start ***** -->
+                    <div class="most-popular">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6">
+                                <a href="Myproperties.html" class="item-link">
+                                    <div class="item">
+                                        <i class="fa-solid fa-file fa-7x"></i>
+                                        <h4>My Properties</h4>
+                                        <p>View and manage all your properties in one place.</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-6">
+                                <a href="Tranferprop.html" class="item-link">
+                                    <div class="item">
+                                        <i class="fa-solid fa-share fa-7x"></i>
+                                        <h5>Transfer Property</h5>
+                                        <p>Transfer ownership of your properties securely.</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-6">
+                                <a href="Transferhistory.html" class="item-link">
+                                    <div class="item">
+                                        <i class="fa-solid fa-address-book fa-5x"></i>
+                                        <h4>Transaction History</h4>
+                                        <p>Track all your property transactions.</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-6">
+                                <a href="Bidding.html" class="item-link">
+                                    <div class="item">
+                                        <i class="fa-solid fa-money-bill fa-5x"></i>
+                                        <h4>Bidding & Auction</h4>
+                                        <p>Participate in property auctions and bids.</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-6">
+                                <a href="market.html" class="item-link">
+                                    <div class="item">
+                                        <i class="fa-solid fa-shop fa-6x"></i>
+                                        <h4>Marketplace</h4>
+                                        <p>Explore properties available for sale.</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-6">
+                                <a href="https://www.legalkart.com/talk-to-lawyer?utm_source=google&utm_medium=searchads&utm_campaign=legal_talk_general&utm_source=google&utm_medium=cpc&utm_id=18636247563&utm_content=148192371808&utm_term=legal%20consultation&creativeId=629150004679&gclid=CjwKCAjwnPS-BhBxEiwAZjMF0pjEUr-fzhGQKBRZeK1ARVGmRI62W0XueY-AZJo81se1ENGbGaeNPRoCWOYQAvD_BwE&gad_source=1" class="item-link">
+                                    <div class="item">
+                                        <i class="fa-solid fa-scale-balanced fa-4x"></i>
+                                        <h4>Legal Consultation</h4>
+                                        <p>Get expert legal advice for your properties.</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-6">
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSePBICV1CsxqDxy23D4B0QyviFYrfrXH4hwbWfqvUX2QtvmVw/viewform?usp=dialog" class="item-link">
+                                    <div class="item">
+                                        <i class="fa-solid fa-triangle-exclamation fa-6x"></i>
+                                        <h4>Fraud Report</h4>
+                                        <p>Report any fraudulent activities .</p>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-6">
+                                <a href="Tax.html" class="item-link">
+                                    <div class="item">
+                                        <i class="fa-solid fa-coins fa-6x"></i>
+                                        <h4>Property Tax</h4>
+                                        <p>Manage and pay your property taxes online.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ***** Most Popular End ***** -->TN2220250000752
+
+<div class="col-lg-12">
+    <div class="main-button">
+        <br><br>
+        <center>
+            <a href="browse.html" class="btn-with-logo">
+                <i class="fa-solid fa-robot button-icon"></i>
+                <h4 class="button-text">AI Legal Assistant</h4>
+            </a>
+        </center>
+    </div>
+</div>
+
+
+
+          <!-- ***** Most Popular End ***** -->
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2025 <a href="#">Propella</a> Company. All rights reserved. 
+          
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+
+  </body>
+
+</html>

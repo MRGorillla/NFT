@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .login-form h2 {
+      color: #fff;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .login-form input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .login-form input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .login-form button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #ff7e5f;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .login-form button:hover {
+      background: #feb47b;
+    }
+
+    .otp-section {
+      margin-top: 20px;
+    }
+
+    .otp-section p {
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .otp-section input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .otp-section button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #23a6d5;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .otp-section button:hover {
+      background: #1e87b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container" id="loginContainer">
+    <img src="assets/images/logo.png" alt="Logo" class="logo">
+    <div class="login-form">
+      <h2>Login</h2>
+      <input type="text" id="loginId" placeholder="Enter Login ID" required>
+      <button onclick="sendOTP()">Send OTP</button>
+    </div>
+    <div class="otp-section" id="otpSection" style="display: none;">
+      <p>Enter the OTP sent to your registered email/mobile:</p>
+      <input type="text" id="otpInput" placeholder="Enter OTP" required>
+      <button onclick="verifyOTP()">Verify OTP</button>
+    </div>
+  </div>
+
+  <script>
+    // Hide the container initially to prevent flash
+    document.getElementById('loginContainer').style.display = 'none';
+
+    // Check login status after DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      const loginId = localStorage.getItem('loginId');
+      const authToken = localStorage.getItem('authToken');
+      
+      if (loginId && authToken) {
+        // If already logged in, redirect immediately
+        window.location.href = 'index.html';
+      } else {
+        // Show login form if not logged in
+        document.getElementById('loginContainer').style.display = 'block';
+        // Clear any previous partial login data
+        localStorage.removeItem('loginId');
+        localStorage.removeItem('authToken');
+      }
+    });
+
+    function sendOTP() {
+      const loginId = document.getElementById('loginId').value;
+      if (!loginId) {
+        alert('Please enter your Login ID.');
+        return;
+      }
+      
+      // Store login ID temporarily
+      localStorage.setItem('loginId', loginId);
+      
+      // Show OTP section
+      document.getElementById('otpSection').style.display = 'block';
+      
+      // Simulate OTP sending
+      alert('OTP sent to your registered contact');
+    }
+    
+    function verifyOTP() {
+      const otpInput = document.getElementById('otpInput').value;
+      const loginId = localStorage.getItem('loginId');
+      
+      if (!otpInput) {
+        alert('Please enter the OTP.');
+        return;
+      }
+      
+      // In a real app, verify OTP with backend
+      // For demo, we'll accept any 6-digit OTP
+      if (otpInput.length === 6) {
+        // Generate a mock auth token
+        const authToken = Math.random().toString(36).substring(2);
+        localStorage.setItem('authToken', authToken);
+        window.location.href = 'index.html';
+      } else {
+        alert('Invalid OTP. Please enter a 6-digit code.');
+      }
+    }
+  </script>
+</body>
+</html>
