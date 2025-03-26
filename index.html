@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>NFT SHIT</title>
@@ -107,13 +108,29 @@
     </a>
   </div>
 
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
+  <!-- Update the header area in your HTML -->
+<header class="header-area header-sticky">
     <div class="container">
         <div class="row">
             <div class="col-12">
+                <!-- Mobile Menu Button -->
+                <div class="menu-trigger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
                 <nav class="main-nav">
-                    <!-- ***** Navigation Menu Start (Right Aligned) ***** -->
+                    <ul>
+                        <!-- menu items -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+                
+                <nav class="main-nav">
                     <ul>
                         <li><a href="Myproperties.html"><i class="fa-solid fa-file"></i> My Properties</a></li>
                         <li><a href="Tranferprop.html"><i class="fa-solid fa-share"></i> Transfer</a></li>
@@ -126,7 +143,9 @@
             </div>
         </div>
     </div>
-  </header>
+</header>
+
+
   <!-- ***** Header Area End ***** -->
 
   <div class="container">
@@ -278,5 +297,55 @@
     });
   </script>
 
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuTrigger = document.querySelector('.menu-trigger');
+    const mainNav = document.querySelector('.main-nav ul');
+    
+    // Initialize menu state
+    let isMenuOpen = false;
+    
+    // Toggle menu function
+    function toggleMenu() {
+      isMenuOpen = !isMenuOpen;
+      menuTrigger.classList.toggle('active', isMenuOpen);
+      mainNav.classList.toggle('active', isMenuOpen);
+      
+      // Prevent scrolling when menu is open
+      document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    }
+    
+    // Add click event
+    menuTrigger.addEventListener('click', toggleMenu);
+    
+    // Close menu when clicking on a link
+    document.querySelectorAll('.main-nav ul li a').forEach(link => {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 992) {
+          isMenuOpen = false;
+          menuTrigger.classList.remove('active');
+          mainNav.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+    
+    // Make header sticky on scroll
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('.header-area');
+      if (window.scrollY > 50) {
+        header.classList.add('header-sticky');
+      } else {
+        header.classList.remove('header-sticky');
+      }
+    });
+    
+    // Initialize sticky header if not at top
+    if (window.scrollY > 50) {
+      document.querySelector('.header-area').classList.add('header-sticky');
+    }
+  });
+</script>
 </body>
 </html>

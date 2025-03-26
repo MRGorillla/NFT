@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>Legal Consultation | Property Portfolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1f2122;
+            color: #ec6090;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            text-align: left;
+        }
+        
+        .logo img {
+            max-width: 200px;
+        }
+        
+        .nav-bar {
+            display: flex;
+        }
+        
+        .nav-bar ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-bar ul li {
+            margin-left: 20px;
+        }
+        
+        .nav-bar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-bar ul li a:hover {
+            background-color: #e75e8d;
+            color: white;
+        }
+        
+        .heading {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e75e8d;
+        }
+        
+        .legal-container {
+            display: flex;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .legal-options {
+            flex: 1;
+            background: #27292a;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .legal-content {
+            flex: 2;
+            background: #27292a;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .option-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .option-item:hover {
+            background-color: #333;
+            border-left: 3px solid #e75e8d;
+        }
+        
+        .option-item.active {
+            background-color: #333;
+            border-left: 3px solid #e75e8d;
+        }
+        
+        .option-item i {
+            margin-right: 10px;
+            color: #e75e8d;
+        }
+        
+        .legal-content h3 {
+            color: #e75e8d;
+            margin-top: 0;
+        }
+        
+        .legal-content p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e75e8d;
+        }
+        
+        .form-group input, 
+        .form-group textarea, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: white;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        .btn {
+            background-color: #e75e8d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #d04d7c;
+        }
+        
+        .document-checklist {
+            margin-top: 20px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .checklist-item input {
+            margin-right: 10px;
+        }
+        
+        .checklist-item label {
+            color: #ccc;
+        }
+        
+        .chat-container {
+            height: 400px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            background-color: #333;
+        }
+        
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background-color: #e75e8d;
+            color: white;
+            margin-left: auto;
+        }
+        
+        .bot-message {
+            background-color: #444;
+            color: white;
+            margin-right: auto;
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: white;
+        }
+        
+        .chat-input button {
+            background-color: #e75e8d;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .lawyer-card {
+            display: flex;
+            background-color: #333;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .lawyer-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+        
+        .lawyer-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .lawyer-info {
+            flex: 1;
+        }
+        
+        .lawyer-info h4 {
+            margin: 0 0 5px 0;
+            color: #e75e8d;
+        }
+        
+        .lawyer-info p {
+            margin: 0;
+            color: #ccc;
+            font-size: 14px;
+        }
+        
+        .lawyer-rating {
+            color: #ffc107;
+            margin: 5px 0;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .legal-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+  <div class="header-container">
+    <div class="logo">
+      <a href="index.html">
+        <img src="assets/images/logo.png" alt="Property Portfolio">
+      </a>
+    </div>
+    
+    <nav class="nav-bar">
+      <ul>
+        <li><a href="Myproperties.html"><i class="fa-solid fa-file"></i> Properties</a></li>
+        <li><a href="Transferhistory.html"><i class="fa-solid fa-address-book"></i> History</a></li>
+        <li><a href="Bidding.html"><i class="fa-solid fa-money-bill"></i> Bidding</a></li>
+        <li><a href="Tax.html"><i class="fa-solid fa-coins"></i> Tax</a></li>
+        <li><a href="#" id="ai-assistant-btn"><i class="fa-solid fa-robot"></i> AI Assistant</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <h1 class="heading"><em>Legal</em> Consultation</h1>
+
+  <div class="legal-container">
+    <div class="legal-options">
+      <div class="option-item active" data-tab="property-law">
+        <i class="fa-solid fa-house"></i> Property Law
+      </div>
+      <div class="option-item" data-tab="documentation">
+        <i class="fa-solid fa-file-contract"></i> Documentation
+      </div>
+      <div class="option-item" data-tab="dispute">
+        <i class="fa-solid fa-gavel"></i> Dispute Resolution
+      </div>
+      <div class="option-item" data-tab="tax-legal">
+        <i class="fa-solid fa-scale-balanced"></i> Tax & Legal
+      </div>
+      <div class="option-item" data-tab="chat-lawyer">
+        <i class="fa-solid fa-comments"></i> Chat with Lawyer
+      </div>
+      <div class="option-item" data-tab="find-lawyer">
+        <i class="fa-solid fa-magnifying-glass"></i> Find a Lawyer
+      </div>
+    </div>
+    
+    <div class="legal-content">
+      <!-- Property Law Content -->
+      <div id="property-law" class="tab-content active">
+        <h3>Property Law Assistance</h3>
+        <p>Get expert guidance on property-related legal matters including ownership transfers, title verification, and compliance with local regulations.</p>
+        
+        <div class="form-group">
+          <label for="property-issue">What is your legal concern about?</label>
+          <select id="property-issue">
+            <option value="">Select an issue</option>
+            <option value="title">Title Verification</option>
+            <option value="transfer">Property Transfer</option>
+            <option value="inheritance">Inheritance Issues</option>
+            <option value="dispute">Boundary Dispute</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="property-details">Please provide details</label>
+          <textarea id="property-details" placeholder="Describe your legal issue in detail..."></textarea>
+        </div>
+        
+        <button class="btn" id="submit-property-query">Get Legal Advice</button>
+      </div>
+      
+      <!-- Documentation Content -->
+      <div id="documentation" class="tab-content">
+        <h3>Documentation Assistance</h3>
+        <p>Ensure your property documents are complete and legally valid. We can help you verify, prepare, or rectify any documentation issues.</p>
+        
+        <div class="document-checklist">
+          <h4>Checklist of Required Documents</h4>
+          <div class="checklist-item">
+            <input type="checkbox" id="doc1">
+            <label for="doc1">Title Deed</label>
+          </div>
+          <div class="checklist-item">
+            <input type="checkbox" id="doc2">
+            <label for="doc2">Sale Agreement</label>
+          </div>
+          <div class="checklist-item">
+            <input type="checkbox" id="doc3">
+            <label for="doc3">Encumbrance Certificate</label>
+          </div>
+          <div class="checklist-item">
+            <input type="checkbox" id="doc4">
+            <label for="doc4">Property Tax Receipts</label>
+          </div>
+          <div class="checklist-item">
+            <input type="checkbox" id="doc5">
+            <label for="doc5">Approved Building Plan</label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Upload Documents for Verification</label>
+          <input type="file" multiple>
+        </div>
+        
+        <button class="btn">Verify Documents</button>
+      </div>
+      
+      <!-- Dispute Resolution Content -->
+      <div id="dispute" class="tab-content">
+        <h3>Dispute Resolution</h3>
+        <p>Resolve property disputes through mediation or legal channels. Describe your dispute to get appropriate guidance.</p>
+        
+        <div class="form-group">
+          <label for="dispute-type">Type of Dispute</label>
+          <select id="dispute-type">
+            <option value="">Select dispute type</option>
+            <option value="boundary">Boundary Dispute</option>
+            <option value="ownership">Ownership Dispute</option>
+            <option value="tenant">Tenant-Landlord Dispute</option>
+            <option value="construction">Construction Dispute</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="dispute-details">Dispute Details</label>
+          <textarea id="dispute-details" placeholder="Provide complete details of the dispute including parties involved..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="dispute-resolution">Preferred Resolution Method</label>
+          <select id="dispute-resolution">
+            <option value="">Select preferred method</option>
+            <option value="mediation">Mediation</option>
+            <option value="arbitration">Arbitration</option>
+            <option value="legal">Legal Action</option>
+            <option value="advice">Just Need Advice</option>
+          </select>
+        </div>
+        
+        <button class="btn">Submit Dispute Details</button>
+      </div>
+      
+      <!-- Tax & Legal Content -->
+      <div id="tax-legal" class="tab-content">
+        <h3>Tax & Legal Compliance</h3>
+        <p>Ensure your property transactions comply with all tax regulations and legal requirements.</p>
+        
+        <div class="form-group">
+          <label for="tax-query">Your Tax/Legal Question</label>
+          <textarea id="tax-query" placeholder="Ask about capital gains, property tax, stamp duty, or other tax/legal matters..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="property-value">Property Value (if applicable)</label>
+          <input type="text" id="property-value" placeholder="Enter approximate property value">
+        </div>
+        
+        <div class="form-group">
+          <label for="transaction-type">Transaction Type</label>
+          <select id="transaction-type">
+            <option value="">Select transaction type</option>
+            <option value="purchase">Purchase</option>
+            <option value="sale">Sale</option>
+            <option value="inheritance">Inheritance</option>
+            <option value="gift">Gift</option>
+            <option value="lease">Lease</option>
+          </select>
+        </div>
+        
+        <button class="btn">Get Tax/Legal Advice</button>
+      </div>
+      
+      <!-- Chat with Lawyer Content -->
+      <div id="chat-lawyer" class="tab-content">
+        <h3>Chat with a Lawyer</h3>
+        <p>Get immediate answers to your legal questions from our network of property law experts.</p>
+        
+        <div class="chat-container" id="chat-messages">
+          <div class="chat-message bot-message">
+            Hello! I'm your legal assistant. How can I help you with your property legal matters today?
+          </div>
+        </div>
+        
+        <div class="chat-input">
+          <input type="text" id="user-message" placeholder="Type your legal question here...">
+          <button id="send-message"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+        
+        <p style="text-align: center; margin-top: 15px; color: #888; font-size: 14px;">
+          For complex matters, consider booking a consultation with a specialist lawyer.
+        </p>
+      </div>
+      
+      <!-- Find a Lawyer Content -->
+      <div id="find-lawyer" class="tab-content">
+        <h3>Find a Property Lawyer</h3>
+        <p>Connect with verified property lawyers in your area.</p>
+        
+        <div class="form-group">
+          <label for="lawyer-location">Location</label>
+          <input type="text" id="lawyer-location" placeholder="Enter your city or area">
+        </div>
+        
+        <div class="form-group">
+          <label for="lawyer-specialty">Specialty</label>
+          <select id="lawyer-specialty">
+            <option value="">Any Specialty</option>
+            <option value="residential">Residential Property</option>
+            <option value="commercial">Commercial Property</option>
+            <option value="land">Land Disputes</option>
+            <option value="rental">Rental Agreements</option>
+            <option value="international">International Property</option>
+          </select>
+        </div>
+        
+        <button class="btn">Search Lawyers</button>
+        
+        <div class="search-results" style="margin-top: 30px;">
+          <h4>Recommended Lawyers</h4>
+          
+          <div class="lawyer-card">
+            <div class="lawyer-photo">
+              <img src="assets/images/lawyer1.jpg" alt="Adv. Priya Sharma">
+            </div>
+            <div class="lawyer-info">
+              <h4>Adv. Priya Sharma</h4>
+              <p>Property Law Specialist</p>
+              <div class="lawyer-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                (4.7)
+              </div>
+              <p><i class="fas fa-map-marker-alt"></i> Chennai | 12 years experience</p>
+            </div>
+            <button class="btn">Consult</button>
+          </div>
+          
+          <div class="lawyer-card">
+            <div class="lawyer-photo">
+              <img src="assets/images/lawyer2.jpg" alt="Adv. Ramesh Kumar">
+            </div>
+            <div class="lawyer-info">
+              <h4>Adv. Ramesh Kumar</h4>
+              <p>Real Estate Transactions</p>
+              <div class="lawyer-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                (4.2)
+              </div>
+              <p><i class="fas fa-map-marker-alt"></i> Bangalore | 8 years experience</p>
+            </div>
+            <button class="btn">Consult</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Copyright © 2023 Property Portfolio. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Tab switching functionality
+    document.querySelectorAll('.option-item').forEach(item => {
+      item.addEventListener('click', function() {
+        // Remove active class from all options
+        document.querySelectorAll('.option-item').forEach(opt => {
+          opt.classList.remove('active');
+        });
+        
+        // Add active class to clicked option
+        this.classList.add('active');
+        
+        // Hide all tab contents
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        
+        // Show selected tab content
+        const tabId = this.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+    
+    // Chat functionality
+    document.getElementById('send-message').addEventListener('click', function() {
+      const userMessage = document.getElementById('user-message').value.trim();
+      if (userMessage) {
+        // Add user message to chat
+        const userMsgElement = document.createElement('div');
+        userMsgElement.className = 'chat-message user-message';
+        userMsgElement.textContent = userMessage;
+        document.getElementById('chat-messages').appendChild(userMsgElement);
+        
+        // Clear input
+        document.getElementById('user-message').value = '';
+        
+        // Simulate bot response (in real app, this would be an API call)
+        setTimeout(() => {
+          const botResponses = [
+            "I understand your concern about property documentation. For title verification, you'll need to check the encumbrance certificate and property tax receipts.",
+            "Based on your description, you may need to consult a lawyer about this boundary dispute. Would you like me to connect you with a property law specialist?",
+            "For inheritance matters, the legal process depends on whether there's a will. Without a will, the property would be distributed according to succession laws.",
+            "I recommend reviewing the sale agreement carefully before proceeding. Many disputes arise from unclear terms in the agreement.",
+            "Thank you for your question. I'm checking our legal resources to provide you with the most accurate information."
+          ];
+          
+          const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
+          
+          const botMsgElement = document.createElement('div');
+          botMsgElement.className = 'chat-message bot-message';
+          botMsgElement.textContent = randomResponse;
+          document.getElementById('chat-messages').appendChild(botMsgElement);
+          
+          // Scroll to bottom of chat
+          document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
+        }, 1000);
+      }
+    });
+    
+    // Allow pressing Enter to send message
+    document.getElementById('user-message').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        document.getElementById('send-message').click();
+      }
+    });
+    
+    // AI Assistant button functionality
+    document.getElementById('ai-assistant-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!window.Chatling) {
+            const script = document.createElement('script');
+            script.src = 'https://chatling.ai/js/embed.js';
+            script.async = true;
+            script.id = 'chatling-embed-script';
+            script.setAttribute('data-id', '7291819981');
+            document.body.appendChild(script);
+            window.chtlConfig = { chatbotId: "7291819981" };
+        }
+        else if (window.Chatling.open) {
+            window.Chatling.open();
+        }
+    });
+  </script>
+
+</body>
+</html>
